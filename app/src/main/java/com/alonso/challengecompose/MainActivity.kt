@@ -3,113 +3,67 @@ package com.alonso.challengecompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.lerp
-import androidx.compose.ui.util.lerp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.ui.NavDisplay
 import com.alonso.challengecompose.ui.theme.ChallengeComposeTheme
-import kotlin.math.absoluteValue
+import com.alonso.detail.DetailScreen
+import com.alonso.home.HomeScreen
+import com.alonso.navigation.AppNavigator
+import com.alonso.navigation.AppScreen
+import com.alonso.navigation.App.LocalComposeNavigator
+import dagger.hilt.android.AndroidEntryPoint
+import jakarta.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    internal lateinit var composeNavigator: AppNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        //enableEdgeToEdge()
         setContent {
             ChallengeComposeTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    containerColor = Color.Blue
-                ) { innerPadding ->
-                    CoffeeStarBuckScree()
-                }
+                NavigationApp(appNavigator = composeNavigator)
             }
         }
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CoffeeStarBuckScree(
-    modifier: Modifier = Modifier
+fun NavigationApp(
+    modifier: Modifier = Modifier,
+    appNavigator: AppNavigator
 ) {
-    //val maxTranslationY = 450f // Increased for more downward movement
-    val maxTranslationY = 420f // Increased for more downward movement
-    val imageList = listOf(
-        R.drawable.coffee_starbuck,
-        R.drawable.coffee_starbuck,
-        R.drawable.coffee_starbuck,
-        R.drawable.coffee_starbuck,
-        R.drawable.coffee_starbuck,
-        R.drawable.coffee_starbuck,
-        R.drawable.coffee_starbuck,
-        R.drawable.coffee_starbuck,
-        R.drawable.coffee_starbuck,
-        R.drawable.coffee_starbuck,
-        R.drawable.coffee_starbuck,
-    )
-    val pagerState = rememberPagerState { imageList.size }
+    val backStack: NavBackStack<NavKey> = rememberNavBackStack(AppScreen.Home)
+    LaunchedEffect(Unit) { appNavigator.initialize(backStack) }
+    CompositionLocalProvider(LocalComposeNavigator provides appNavigator) {
+        NavDisplay(
+            modifier = modifier,
+            backStack = backStack,
+            onBack = { appNavigator.popBack() },
+            entryProvider = entryProvider {
+                entry<AppScreen.Home> { HomeScreen() }
+                entry<AppScreen.Detail> { entry -> DetailScreen() }
+            }
+        )
+    }
 
-    HorizontalPager(
-        state = pagerState,
-        modifier = Modifier.fillMaxWidth(),
-        pageSpacing = 5.dp,
-        contentPadding = PaddingValues(horizontal = 90.dp)
-    ) { page ->
-        Box(
-            modifier = Modifier
-                .background(Color.Red)
-                .fillMaxWidth()
-                .height((70 + maxTranslationY).dp) // Fixed: Use image height + translation
-                .graphicsLayer {
-                    val pageOffset =
-                        (pagerState.currentPage - page + pagerState.currentPageOffsetFraction).absoluteValue
-                    lerp(
-                        start = 70.dp,
-                        stop = 120.dp,
-                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                    ).also { scale ->
-                        scaleY = scale / 100.dp
-                    }
-                    translationY = lerp(
-                        start = 0f,
-                        stop = 400f, // Use the constant here
-                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                    )
-                }
-                .blur(
-                    radius = if (pagerState.currentPage == page) 0.dp else 12.dp // Blur non-current pages
-                ),
-            contentAlignment = Alignment.TopCenter // Changed from Center to TopCenter
-        ) {
-            Image(
-                painter = painterResource(id = imageList[page]),
-                contentDescription = "",
-                modifier = Modifier
-                    .height(320.dp)
-                    .width(190.dp),
-                contentScale = ContentScale.Crop
-            )
-        }
+}
 
+@Preview(showBackground = true, name = "Full Screen")
+@Composable
+private fun HomeScreenPreview() {
+    ChallengeComposeTheme {
+        DetailScreen()
     }
 }
