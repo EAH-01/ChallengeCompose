@@ -8,17 +8,15 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation3.runtime.NavBackStack
-import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.alonso.challengecompose.ui.theme.ChallengeComposeTheme
 import com.alonso.detail.DetailScreen
 import com.alonso.home.HomeScreen
+import com.alonso.navigation.LocalComposeNavigator
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
-import com.alonso.navigation.App.LocalComposeNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import jakarta.inject.Inject
 
@@ -44,7 +42,7 @@ fun NavigationApp(
     modifier: Modifier = Modifier,
     appNavigator: AppNavigator
 ) {
-    val backStack: NavBackStack<NavKey> = rememberNavBackStack(AppScreen.Home)
+    val backStack = rememberNavBackStack(AppScreen.Home)
     LaunchedEffect(Unit) { appNavigator.initialize(backStack) }
     CompositionLocalProvider(LocalComposeNavigator provides appNavigator) {
         NavDisplay(

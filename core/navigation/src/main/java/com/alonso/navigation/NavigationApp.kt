@@ -9,20 +9,18 @@ import androidx.navigation3.runtime.NavKey
 import javax.inject.Inject
 
 
-object App {
-    val LocalComposeNavigator: ProvidableCompositionLocal<AppNavigator> =
-        compositionLocalOf {
-            error(
-                "No AppComposeNavigator provided! " +
-                        "Make sure to wrap all usages of app components in NavigationApp.",
-            )
-        }
+val LocalComposeNavigator: ProvidableCompositionLocal<AppNavigator> =
+    compositionLocalOf {
+        error(
+            "No AppComposeNavigator provided! " +
+                    "Make sure to wrap all usages of app components in NavigationApp.",
+        )
+    }
 
-    val navRoot: AppNavigator
-        @Composable
-        @ReadOnlyComposable
-        get() = LocalComposeNavigator.current
-}
+val navRoot: AppNavigator
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalComposeNavigator.current
 
 
 abstract class AppNavigator {

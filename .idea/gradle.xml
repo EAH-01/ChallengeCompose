@@ -30,7 +30,11 @@
             <option value="$PROJECT_DIR$/core/ui_components" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/detail" />
+            <option value="$PROJECT_DIR$/feature/detail/presentation" />
             <option value="$PROJECT_DIR$/feature/home" />
+            <option value="$PROJECT_DIR$/feature/home/data" />
+            <option value="$PROJECT_DIR$/feature/home/domain" />
+            <option value="$PROJECT_DIR$/feature/home/presentation" />
             <option value="$PROJECT_DIR$/lab" />
           </set>
         </option>

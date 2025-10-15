@@ -54,9 +54,9 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.coil.compose)
 
-    implementation(project(":feature:home"))
+    implementation(project(":feature:home:presentation"))
     implementation(project(":core:navigation"))
-    implementation(project(":feature:detail"))
+    implementation(project(":feature:detail:presentation"))
 
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)

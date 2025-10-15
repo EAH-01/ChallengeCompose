@@ -21,10 +21,12 @@ dependencyResolutionManagement {
 
 rootProject.name = "ChallengeCompose"
 include(":app")
-include(":feature:home")
-include(":feature:detail")
+include(":feature:home:presentation")
+include(":feature:detail:presentation")
 include(":core:navigation")
 include(":core:network")
 include(":core:ui_components")
 include(":core:designsystem")
 include(":lab")
+include(":feature:home:data")
+include(":feature:home:domain")
