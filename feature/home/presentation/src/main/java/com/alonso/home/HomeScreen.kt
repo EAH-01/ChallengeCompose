@@ -1,18 +1,15 @@
 package com.alonso.home
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,72 +19,76 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.alonso.home.components.BannerImage
-import com.alonso.home.components.CategoryOption
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.alonso.designsystem.AppTheme
 import com.alonso.home.components.CoffeeCard
-import com.alonso.home.components.Header
+import com.alonso.home.components.HomeTopBar
+import com.alonso.home.components.LoadCoffeeList
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
 import com.alonso.navigation.navRoot
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
     appNavigator: AppNavigator = navRoot,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-
-    val categories = listOf("Recommendation", "Coffee", "Tea", "Smoothie")
-    var selectedCategory by remember { mutableStateOf("Coffee") }
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val lazyGridState = rememberLazyGridState()
 
-
     Scaffold(
-        containerColor = Color.White,
+        modifier = modifier,
+        containerColor = AppTheme.colors.backgroundHome,
         topBar = {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Header(
-                    modifier = modifier.padding(12.dp),
-                    title = "PICK YOUR COFFEE",
-                    subtitle = "Pick Up in store within 30 minutes"
-                )
-                BannerImage(
-                    modifier.padding(12.dp),
-                )
-                LazyRow(modifier = modifier.padding(bottom = 8.dp)) {
-                    items(categories) { category ->
-                        CategoryOption(
-                            text = category,
-                            isSelected = selectedCategory == category,
-                            onClick = { selectedCategory = category }
-                        )
-                    }
-                }
-            }
+            HomeTopBar(
+                categories = uiState.categories,
+                selectedCategory = uiState.selectedCategory,
+                onClick = { viewModel.onSelectCategory(it) }
+            )
         }
     ) { innerPadding ->
-        LazyVerticalGrid(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize(),
-            columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(end = 12.dp),
-            state = lazyGridState,
-        ) {
-            items(10) { index ->
-                CoffeeCard(
-                    modifier = Modifier.padding(start = 12.dp, top = 12.dp),
-                    coffeeName = "Vietnamese Coconut Coffee",
-                    price = "11",
-                    onClick = { appNavigator.goTo(AppScreen.Detail) },
-                    imageRes = com.alonso.designsystem.R.drawable.coffee_starbuck
-                )
+
+        if (uiState.isLoading) {
+            LoadCoffeeList(
+                modifier = modifier
+                    .padding(innerPadding)
+                    .fillMaxSize(), lazyGridState = lazyGridState
+            )
+        } else {
+            LazyVerticalGrid(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize(),
+                columns = GridCells.Fixed(2),
+                contentPadding = PaddingValues(end = 12.dp),
+                state = lazyGridState,
+            ) {
+
+                items(uiState.coffeeList, key = { it.id }) { coffee ->
+                    CoffeeCard(
+                        modifierParent = Modifier.padding(start = 12.dp, top = 12.dp),
+                        coffeeName = coffee.name,
+                        price = coffee.price.toString(),
+                        onClick = {
+                            appNavigator.goTo(
+                                AppScreen.Detail(
+                                    coffeeClicked = uiState.coffeeList.indexOf(coffee),
+                                    listCoffee = uiState.coffeeList
+                                )
+                            )
+                        },
+                        imageUrl = coffee.image
+                    )
+                }
             }
         }
     }
 }
 
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Preview(showBackground = true, name = "Full Screen")
 @Composable
 private fun HomeScreenPreview() {

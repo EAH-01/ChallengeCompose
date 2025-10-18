@@ -6,6 +6,6 @@ data class CoffeeResponse(
     val price: Double,
     val description: String,
     val image: String,
-    val vote: Int
+    val qualification: Int
 )
 

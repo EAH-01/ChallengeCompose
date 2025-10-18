@@ -31,7 +31,6 @@ abstract class AppNavigator {
 
     abstract fun goTo(key: NavKey, clearBackStack: Boolean = false)
     abstract fun popBack()
-    abstract fun canGoBack(): Boolean
 }
 
 
@@ -44,9 +43,5 @@ class CoffeeNavigator @Inject constructor() : AppNavigator() {
 
     override fun popBack() {
         navBackStack?.removeLastOrNull()
-    }
-
-    override fun canGoBack(): Boolean {
-        return navBackStack?.size?.let { it > 1 } ?: false
     }
 }

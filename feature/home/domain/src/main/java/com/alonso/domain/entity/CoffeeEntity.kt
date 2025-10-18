@@ -6,5 +6,5 @@ data class CoffeeEntity(
     val price: Double,
     val description: String,
     val image: String,
-    val vote: Int
+    val qualification: Int
 )

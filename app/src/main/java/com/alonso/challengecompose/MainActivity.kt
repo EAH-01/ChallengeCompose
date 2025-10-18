@@ -3,20 +3,18 @@ package com.alonso.challengecompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.collectAsState
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
-import com.alonso.challengecompose.ui.theme.ChallengeComposeTheme
+import com.alonso.challengecompose.ui.theme.AppTheme
 import com.alonso.detail.DetailScreen
 import com.alonso.home.HomeScreen
-import com.alonso.navigation.LocalComposeNavigator
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
+import com.alonso.ui_components.base.Loader
+import com.alonso.ui_components.components.LoaderModal
 import dagger.hilt.android.AndroidEntryPoint
 import jakarta.inject.Inject
 
@@ -26,42 +24,31 @@ class MainActivity : ComponentActivity() {
     @Inject
     internal lateinit var composeNavigator: AppNavigator
 
+    @Inject
+    internal lateinit var loader: Loader
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContent {
-            ChallengeComposeTheme {
-                NavigationApp(appNavigator = composeNavigator)
+            AppTheme(appNavigator = composeNavigator) {
+                LoaderModal(loader.loading.collectAsState().value)
+                val backStack = rememberNavBackStack(AppScreen.Home)
+                LaunchedEffect(Unit) { composeNavigator.initialize(backStack) }
+                NavDisplay(
+                    backStack = backStack,
+                    onBack = { composeNavigator.popBack() },
+                    entryProvider = entryProvider {
+                        entry<AppScreen.Home> { HomeScreen() }
+                        entry<AppScreen.Detail> {
+                            DetailScreen(
+                                listCoffee = it.listCoffee,
+                                coffeeClicked = it.coffeeClicked
+                            )
+                        }
+                    }
+                )
             }
         }
-    }
-}
-
-@Composable
-fun NavigationApp(
-    modifier: Modifier = Modifier,
-    appNavigator: AppNavigator
-) {
-    val backStack = rememberNavBackStack(AppScreen.Home)
-    LaunchedEffect(Unit) { appNavigator.initialize(backStack) }
-    CompositionLocalProvider(LocalComposeNavigator provides appNavigator) {
-        NavDisplay(
-            modifier = modifier,
-            backStack = backStack,
-            onBack = { appNavigator.popBack() },
-            entryProvider = entryProvider {
-                entry<AppScreen.Home> { HomeScreen() }
-                entry<AppScreen.Detail> { entry -> DetailScreen() }
-            }
-        )
-    }
-
-}
-
-@Preview(showBackground = true, name = "Full Screen")
-@Composable
-private fun HomeScreenPreview() {
-    ChallengeComposeTheme {
-        DetailScreen()
     }
 }

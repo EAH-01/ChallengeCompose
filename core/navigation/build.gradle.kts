@@ -9,10 +9,10 @@ plugins {
 
 android {
     namespace = "com.alonso.navigation"
-    compileSdk = 36
+    compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = ProjectConfig.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -46,6 +46,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
 
+    //Navigation
     //api(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)

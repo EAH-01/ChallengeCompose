@@ -7,7 +7,7 @@ import com.alonso.domain.repository.HomeRepository
 import javax.inject.Inject
 
 class HomeUseCase @Inject constructor(
-    private val homeRepository: HomeRepository,
+    private val homeRepository: HomeRepository
 ) {
 
     suspend operator fun invoke(category: String): ResultDataEntity<List<CoffeeEntity>?, ErrorEntity.Network> {

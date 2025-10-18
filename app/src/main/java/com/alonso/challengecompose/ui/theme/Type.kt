@@ -7,6 +7,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 
+/*
 val Typography = Typography(
     headlineMedium = TextStyle(
         fontFamily = FontFamily.Default,
@@ -36,4 +37,4 @@ val Typography = Typography(
         lineHeight = 20.sp,
         letterSpacing = 0.1.sp
     )
-)
+)*/

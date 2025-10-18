@@ -15,6 +15,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.alonso.designsystem.AppTheme
 
 
 @Composable
@@ -52,7 +53,7 @@ fun CategoryOption(
             )
             .padding(horizontal = 16.dp, vertical = 8.dp),
         text = text,
-        style = MaterialTheme.typography.bodyMedium.copy(
+        style = AppTheme.typography.bodyMedium.copy(
             color = textColor,
             fontWeight = if (isSelected) FontWeight.Medium else FontWeight.Normal
         )

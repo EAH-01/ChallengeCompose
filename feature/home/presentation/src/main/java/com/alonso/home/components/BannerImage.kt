@@ -26,7 +26,7 @@ fun BannerImage(modifier: Modifier = Modifier, show: Boolean = true) {
                 .fillMaxWidth()
                 .height(90.dp)
                 .background(
-                    color = Color(0xFFFEF2E6),
+                    color = Color(0xFFF3D7BB),
                     shape = RoundedCornerShape(12.dp)
                 )
         )

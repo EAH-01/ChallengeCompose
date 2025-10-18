@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        minSdk = 24
+        minSdk = ProjectConfig.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -44,7 +44,7 @@ dependencies {
     implementation(libs.retrofit.core)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
-    implementation(project(":core:network"))
+    implementation(project(":core:data"))
     implementation(project(":feature:home:domain"))
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

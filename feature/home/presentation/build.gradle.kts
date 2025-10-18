@@ -8,10 +8,10 @@ plugins {
 
 android {
     namespace = "com.alonso.presentation"
-    compileSdk = 36
+    compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = ProjectConfig.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -48,11 +48,15 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.coil.compose)
+
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Design System module
     implementation(project(":core:designsystem"))
     implementation(project(":core:navigation"))
     implementation(project(":feature:home:domain"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:designsystem"))
     // Hilt
     implementation(libs.compose.hilt.navigation)
     implementation(libs.hilt)

@@ -8,5 +8,19 @@ sealed interface AppScreen : NavKey {
     data object Home : NavKey
 
     @Serializable
-    data object Detail : NavKey
+    data class Detail(
+        val listCoffee: List<CoffeeItem>,
+        val coffeeClicked: Int = 0
+    ) : AppScreen
 }
+
+@Serializable
+data class CoffeeItem(
+    val id: Int,
+    val name: String,
+    val price: Double,
+    val description: String,
+    val image: String,
+    val qualification: Int
+)
+

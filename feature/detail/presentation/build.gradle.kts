@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "com.alonso.presentation"
-    compileSdk = 36
+    compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = ProjectConfig.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -46,9 +46,10 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.coil.compose)
     // Design System module
     implementation(project(":core:designsystem"))
+    implementation(project(":core:navigation"))
+    implementation(project(":core:ui"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

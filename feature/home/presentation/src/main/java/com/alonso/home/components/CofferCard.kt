@@ -1,6 +1,5 @@
 package com.alonso.home.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -21,8 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -30,21 +26,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.alonso.ui_components.components.LoadImage
 
 @Composable
 fun CoffeeCard(
+    modifierParent: Modifier = Modifier,
+    modifierImg: Modifier = Modifier,
     coffeeName: String,
     price: String,
-    imageRes: Int,
-    onClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+    imageUrl: String,
+    onClick: () -> Unit = {}
 ) {
 
     Box(
-        modifier = modifier
+        modifier = modifierParent
             .clickable(onClick = onClick)
             .width(200.dp)
-            .height(260.dp)
+            .height(215.dp)
             .border(
                 width = 1.dp,
                 color = Color(0xFFF5F1EE),
@@ -58,8 +56,9 @@ fun CoffeeCard(
     ) {
         Column {
             CoffeeImageContainer(
-                imageRes = imageRes,
-                imageContainerHeight = 180.dp,
+                modifierImg = modifierImg,
+                imageUrl = imageUrl,
+                imageContainerHeight = 150.dp,
                 imageHeight = 150.dp,
                 imageWidth = 110.dp,
                 cornerRadius = 8.dp,
@@ -79,7 +78,8 @@ fun CoffeeCard(
 
 @Composable
 private fun CoffeeImageContainer(
-    imageRes: Int,
+    modifierImg: Modifier = Modifier,
+    imageUrl: String,
     imageContainerHeight: Dp,
     imageHeight: Dp,
     imageWidth: Dp,
@@ -88,7 +88,7 @@ private fun CoffeeImageContainer(
     imageBottomPadding: Dp
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifierImg
             .fillMaxWidth()
             .height(imageContainerHeight)
             .background(
@@ -97,10 +97,8 @@ private fun CoffeeImageContainer(
             ),
         contentAlignment = Alignment.BottomCenter
     ) {
-        Image(
-            painter = painterResource(imageRes),
-            contentDescription = "Imagen del café",
-            contentScale = ContentScale.Fit,
+        LoadImage(
+            url = imageUrl,
             modifier = Modifier
                 .padding(bottom = imageBottomPadding)
                 .height(imageHeight)
@@ -152,7 +150,7 @@ private fun CoffeeCardPreview() {
         CoffeeCard(
             coffeeName = "Vietnamese Coconut Coffee",
             price = "11",
-            imageRes = com.alonso.designsystem.R.drawable.coffee_starbuck
+            imageUrl = "https://png.pngtree.com/png-clipart/20240220/original/pngtree-latte-macchiato-coffee-glass-png-image_14366823.png"
         )
     }
 }

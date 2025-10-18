@@ -52,14 +52,20 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.coil.compose)
-
+    implementation(project(":core:ui"))
+    //Module Home
     implementation(project(":feature:home:presentation"))
-    implementation(project(":core:navigation"))
+    implementation(project(":feature:home:domain"))
+    implementation(project(":feature:home:data"))
+    //Module Detail
     implementation(project(":feature:detail:presentation"))
+    //Others
+    implementation(project(":core:navigation"))
+    implementation(project(":core:designsystem"))
 
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+
 
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
