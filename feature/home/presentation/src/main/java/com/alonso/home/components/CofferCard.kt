@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -56,20 +57,19 @@ fun CoffeeCard(
     ) {
         Column {
             CoffeeImageContainer(
-                modifierImg = modifierImg,
+                modifier = modifierImg,
                 imageUrl = imageUrl,
                 imageContainerHeight = 150.dp,
-                imageHeight = 150.dp,
-                imageWidth = 110.dp,
+                imageHeight = 130.dp,
+                imageWidth = 100.dp,
                 cornerRadius = 8.dp,
                 imageBackgroundColor = Color(0xFFF5F1EE),
-                imageBottomPadding = 12.dp
+                imageBottomPadding = 6.dp
             )
             Spacer(modifier = Modifier.height(14.dp))
             CoffeeInfo(
                 coffeeName = coffeeName,
-                price = price,
-                textMaxWidth = 110.dp
+                price = price
             )
         }
     }
@@ -78,7 +78,7 @@ fun CoffeeCard(
 
 @Composable
 private fun CoffeeImageContainer(
-    modifierImg: Modifier = Modifier,
+    modifier: Modifier = Modifier,
     imageUrl: String,
     imageContainerHeight: Dp,
     imageHeight: Dp,
@@ -88,7 +88,7 @@ private fun CoffeeImageContainer(
     imageBottomPadding: Dp
 ) {
     Box(
-        modifier = modifierImg
+        modifier = modifier
             .fillMaxWidth()
             .height(imageContainerHeight)
             .background(
@@ -110,8 +110,7 @@ private fun CoffeeImageContainer(
 @Composable
 private fun CoffeeInfo(
     coffeeName: String,
-    price: String,
-    textMaxWidth: androidx.compose.ui.unit.Dp
+    price: String
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -119,10 +118,12 @@ private fun CoffeeInfo(
         verticalAlignment = Alignment.Top
     ) {
         Text(
-            modifier = Modifier.width(textMaxWidth),
+            modifier = Modifier
+                .weight(0.7f)
+                .fillMaxHeight(),
             text = coffeeName,
             overflow = TextOverflow.Ellipsis,
-            maxLines = 2,
+            maxLines = 3,
             style = TextStyle(
                 fontWeight = FontWeight.W500,
                 color = Color.Black, fontSize = 12.sp
@@ -130,6 +131,7 @@ private fun CoffeeInfo(
         )
 
         Text(
+            modifier = Modifier.weight(0.3f),
             text = "$$price",
             style = TextStyle(
                 color = Color.Black,

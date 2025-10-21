@@ -83,7 +83,7 @@ private fun VolumeInfo(
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = "${volume}ml",
+        text = volume,
         style = MaterialTheme.typography.bodyMedium.copy(
             color = MaterialTheme.colorScheme.onSurfaceVariant
         ),

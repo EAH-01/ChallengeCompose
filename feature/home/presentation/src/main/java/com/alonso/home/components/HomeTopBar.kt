@@ -8,13 +8,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.alonso.home.CategoryOption
 
 @Composable
 internal fun HomeTopBar(
     modifier: Modifier = Modifier,
-    categories: List<String>,
+    categories: List<CategoryOption>,
     selectedCategory: String,
-    onClick: (String) -> Unit
+    showBanner: Boolean,
+    onClick: (CategoryOption) -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Header(
@@ -24,12 +26,13 @@ internal fun HomeTopBar(
         )
         BannerImage(
             modifier.padding(12.dp),
+            show = showBanner,
         )
         LazyRow(modifier = modifier.padding(bottom = 8.dp)) {
             items(categories) {
                 CategoryOption(
-                    text = it,
-                    isSelected = selectedCategory == it,
+                    text = it.name,
+                    isSelected = selectedCategory == it.id,
                     onClick = { onClick(it) }
                 )
             }

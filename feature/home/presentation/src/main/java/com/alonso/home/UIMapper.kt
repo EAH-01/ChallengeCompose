@@ -10,6 +10,8 @@ fun List<CoffeeEntity>.toCoffeeItem() = map {
         price = it.price,
         description = it.description,
         image = it.image,
-        qualification = it.qualification
+        qualification = it.ranking,
+        category = it.category,
+        volume = it.volume
     )
 }

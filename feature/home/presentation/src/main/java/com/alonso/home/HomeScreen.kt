@@ -5,17 +5,15 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -38,6 +36,7 @@ fun HomeScreen(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val lazyGridState = rememberLazyGridState()
 
+
     Scaffold(
         modifier = modifier,
         containerColor = AppTheme.colors.backgroundHome,
@@ -45,7 +44,8 @@ fun HomeScreen(
             HomeTopBar(
                 categories = uiState.categories,
                 selectedCategory = uiState.selectedCategory,
-                onClick = { viewModel.onSelectCategory(it) }
+                showBanner = lazyGridState.isScrollingDown().value.not(),
+                onClick = { viewModel.onSelectCategory(it.id) }
             )
         }
     ) { innerPadding ->
@@ -84,6 +84,14 @@ fun HomeScreen(
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun LazyGridState.isScrollingDown() = remember {
+    derivedStateOf {
+        firstVisibleItemIndex > 0 ||
+                firstVisibleItemScrollOffset > 0
     }
 }
 

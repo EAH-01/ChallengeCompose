@@ -38,7 +38,7 @@ dependencies {
 
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.retrofit.core)
-    implementation(libs.retrofit.gson.converter)
+    api(libs.retrofit.gson.converter)
     implementation(project(":core:domain"))
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)

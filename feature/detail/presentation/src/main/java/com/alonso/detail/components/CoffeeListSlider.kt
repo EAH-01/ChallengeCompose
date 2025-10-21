@@ -1,6 +1,7 @@
 package com.alonso.detail.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,12 +10,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -27,6 +31,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.util.lerp
+import androidx.compose.ui.zIndex
 import com.alonso.navigation.CoffeeItem
 import com.alonso.ui_components.components.LoadImage
 import kotlin.math.absoluteValue
@@ -35,16 +40,17 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
 fun CoffeeListSlider(
-    modifierParent: Modifier = Modifier,
+    modifier: Modifier = Modifier,
     modifierImg: Modifier = Modifier,
     coffeeList: List<CoffeeItem>,
     coffeeClicked: Int,
-    currentPage: (CoffeeItem?) -> Unit = {}
+    currentPage: (CoffeeItem?) -> Unit = {},
 ) {
     if (coffeeList.isEmpty()) return
 
     // Initialize pager with the clicked coffee index, ensuring it's within bounds
     val initialPage = coffeeClicked.coerceIn(0, coffeeList.size - 1)
+
     val pagerState = rememberPagerState(
         initialPage = initialPage,
         pageCount = { coffeeList.size }
@@ -52,6 +58,7 @@ fun CoffeeListSlider(
 
     // Handle page changes
     LaunchedEffect(pagerState) {
+        pagerState.currentPageOffsetFraction
         snapshotFlow { pagerState.currentPage }
             .distinctUntilChanged()
             .collect { page ->
@@ -60,6 +67,9 @@ fun CoffeeListSlider(
                 }
             }
     }
+
+
+
 
     // Initialize with the clicked coffee instead of first coffee
     LaunchedEffect(coffeeList, coffeeClicked) {
@@ -70,7 +80,9 @@ fun CoffeeListSlider(
 
     HorizontalPager(
         state = pagerState,
-        modifier = modifierParent.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(500.dp),
         pageSpacing = 5.dp,
         contentPadding = PaddingValues(horizontal = 90.dp),
     ) { pageIndex ->
@@ -100,18 +112,21 @@ private fun CoffeeImageCard(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .height(490.dp)
+            .height(500.dp)
             .pagerTransition(pageIndex, pagerState)
             .blur(radius = blurRadius),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
         CoffeeImage(imageUrl = coffee.image)
-        CoffeeShadow(
+        /*CoffeeShadow(
             modifier = Modifier
-                .fillMaxSize()
-                .offset(y = (-110).dp)
-        )
+                .background(Color.Red)
+                .fillMaxWidth()
+                .height(20.dp)
+
+                //.offset(y = (-40).dp)
+        )*/
     }
 }
 
@@ -123,9 +138,10 @@ private fun CoffeeImage(
     LoadImage(
         url = imageUrl,
         modifier = modifier
-            .height(320.dp)
+            .height(310.dp)
             .width(190.dp)
-            .aspectRatio(190.dp / 320.dp),
+
+        //.aspectRatio(190.dp / 320.dp),
     )
 }
 
@@ -134,24 +150,24 @@ private fun CoffeeShadow(modifier: Modifier = Modifier) {
     val shadowBrush = remember {
         Brush.radialGradient(
             colors = listOf(
-                Color(0x36808080), // Center - more opaque
-                Color(0x29606060), // Mid-inner
-                Color(0x1C404040), // Mid-outer
-                Color(0x0F202020), // Outer
+                Color(0x50404040), // Center - more opaque for better visibility
+                Color(0x40303030), // Mid-inner
+                Color(0x25202020), // Mid-outer
+                Color(0x15101010), // Outer
                 Color.Transparent   // Edge
             ),
-            radius = 10.dp.value
+            radius = 12.dp.value // Slightly larger radius for better shadow effect
         )
     }
 
     Canvas(modifier = modifier) {
         scale(
-            scaleX = 14f,
-            scaleY = 2f
+            scaleX = 12f, // Reduced scale for better proportions
+            scaleY = 1.8f // Adjusted for more natural shadow appearance
         ) {
             drawCircle(
                 brush = shadowBrush,
-                radius = 5.dp.toPx()
+                radius = 6.dp.toPx() // Slightly larger base radius
             )
         }
     }
@@ -175,3 +191,9 @@ private fun Modifier.pagerTransition(pageIndex: Int, pagerState: PagerState) =
             fraction = offsetFraction
         )
     }
+
+enum class ScrollDirection {
+    Left,
+    Right,
+    Idle
+}

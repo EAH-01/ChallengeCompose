@@ -3,6 +3,9 @@ package com.alonso.challengecompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.navigation3.runtime.entryProvider
@@ -46,7 +49,20 @@ class MainActivity : ComponentActivity() {
                                 coffeeClicked = it.coffeeClicked
                             )
                         }
+                    },
+                    transitionSpec = {
+                        ContentTransform(
+                            slideInHorizontally(initialOffsetX = { it }),
+                            slideOutHorizontally(targetOffsetX = { -it })
+                        )
+                    },
+                    popTransitionSpec = {
+                        ContentTransform(
+                            slideInHorizontally(initialOffsetX = { -it }),
+                            slideOutHorizontally(targetOffsetX = { it })
+                        )
                     }
+
                 )
             }
         }

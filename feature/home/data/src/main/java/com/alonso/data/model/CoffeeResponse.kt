@@ -1,11 +1,23 @@
 package com.alonso.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class CoffeeResponse(
-    val id: Int,
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("name")
     val name: String,
+    @SerializedName("price")
     val price: Double,
+    @SerializedName("description")
     val description: String,
+    @SerializedName("image")
     val image: String,
-    val qualification: Int
+    @SerializedName("qualification")
+    val ranking: Double,
+    @SerializedName("volume")
+    val volume: String,
+    @SerializedName("category")
+    val category: String
 )
 

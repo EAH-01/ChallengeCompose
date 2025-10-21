@@ -3,8 +3,9 @@ package com.alonso.data.api
 import com.alonso.data.model.CoffeeResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface HomeApi {
-    @GET("/basaransuleyman/suleyman-basaranoglu-json/main/detail-page")
-    suspend fun getCofferByCategory(): Response<List<CoffeeResponse>>
+    @GET("/{category}.json")
+    suspend fun getCofferByCategory(@Path("category") category: String): Response<List<CoffeeResponse>>
 }

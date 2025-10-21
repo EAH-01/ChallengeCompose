@@ -1,10 +1,12 @@
 package com.alonso.domain.entity
 
 data class CoffeeEntity(
-    val id: Int,
+    val id: String,
     val name: String,
     val price: Double,
     val description: String,
     val image: String,
-    val qualification: Int
+    val ranking: Double,
+    val category: String,
+    val volume: String
 )

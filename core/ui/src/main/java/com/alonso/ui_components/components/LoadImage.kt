@@ -20,7 +20,6 @@ fun LoadImage(
         model = ImageRequest.Builder(LocalContext.current)
             .data(url)
             .crossfade(true)
-            .transformations (CircleCropTransformation())
             .build(),
         placeholder = painterResource(R.drawable.placeholder_coffee),
         contentDescription = null,

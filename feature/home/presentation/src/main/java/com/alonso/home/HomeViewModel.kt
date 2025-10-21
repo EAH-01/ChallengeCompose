@@ -16,18 +16,22 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     loader: Loader,
-    homeUseCase: HomeUseCase
+    private val homeUseCase: HomeUseCase
 ) : BaseViewModel(loader) {
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState = _uiState.asStateFlow()
 
     init {
+        getCoffeeByCategory("all")
+    }
+
+    private fun getCoffeeByCategory(categoryId: String) {
         launchIO(
             task = {
                 _uiState.update { it.copy(isLoading = true) }
-                delay(2000)
-                homeUseCase("").getResult(
+                delay(1000)
+                homeUseCase(categoryId).getResult(
                     onSuccess = { data ->
                         data?.let { result ->
                             _uiState.update { it.copy(coffeeList = result.toCoffeeItem()) }
@@ -43,7 +47,8 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    fun onSelectCategory(category: String) {
-        _uiState.update { it.copy(selectedCategory = category) }
+    fun onSelectCategory(categoryId: String) {
+        getCoffeeByCategory(categoryId = categoryId)
+        _uiState.update { it.copy(selectedCategory = categoryId) }
     }
 }

@@ -16,11 +16,13 @@ sealed interface AppScreen : NavKey {
 
 @Serializable
 data class CoffeeItem(
-    val id: Int,
+    val id: String,
     val name: String,
     val price: Double,
     val description: String,
     val image: String,
-    val qualification: Int
+    val volume: String,
+    val qualification: Double,
+    val category: String
 )
 
