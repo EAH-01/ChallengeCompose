@@ -3,6 +3,7 @@ package com.alonso.challengecompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -16,6 +17,7 @@ import com.alonso.detail.DetailScreen
 import com.alonso.home.HomeScreen
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
+import com.alonso.splash.SplashScreen
 import com.alonso.ui_components.base.Loader
 import com.alonso.ui_components.components.LoaderModal
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,16 +34,17 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
+        enableEdgeToEdge()
         setContent {
             AppTheme(appNavigator = composeNavigator) {
                 LoaderModal(loader.loading.collectAsState().value)
-                val backStack = rememberNavBackStack(AppScreen.Home)
+                val backStack = rememberNavBackStack(AppScreen.Splash)
                 LaunchedEffect(Unit) { composeNavigator.initialize(backStack) }
                 NavDisplay(
                     backStack = backStack,
                     onBack = { composeNavigator.popBack() },
                     entryProvider = entryProvider {
+                        entry<AppScreen.Splash> { SplashScreen() }
                         entry<AppScreen.Home> { HomeScreen() }
                         entry<AppScreen.Detail> {
                             DetailScreen(

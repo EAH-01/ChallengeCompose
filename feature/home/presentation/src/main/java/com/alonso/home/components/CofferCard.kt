@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.alonso.designsystem.AppTheme
 import com.alonso.ui_components.components.LoadImage
 
 @Composable
@@ -46,12 +47,12 @@ fun CoffeeCard(
             .height(215.dp)
             .border(
                 width = 1.dp,
-                color = Color(0xFFF5F1EE),
-                shape = RoundedCornerShape(8.dp)
+                color = AppTheme.colors.coffeeCardBorder,
+                shape = RoundedCornerShape(18.dp)
             )
             .background(
-                color = Color.White,
-                shape = RoundedCornerShape(8.dp)
+                color = AppTheme.colors.coffeeCardBackgroundPrimary,
+                shape = RoundedCornerShape(18.dp)
             )
             .padding(16.dp)
     ) {
@@ -63,7 +64,7 @@ fun CoffeeCard(
                 imageHeight = 130.dp,
                 imageWidth = 100.dp,
                 cornerRadius = 8.dp,
-                imageBackgroundColor = Color(0xFFF5F1EE),
+                imageBackgroundColor = AppTheme.colors.coffeeCardBackgroundSecondary,
                 imageBottomPadding = 6.dp
             )
             Spacer(modifier = Modifier.height(14.dp))
@@ -126,7 +127,8 @@ private fun CoffeeInfo(
             maxLines = 3,
             style = TextStyle(
                 fontWeight = FontWeight.W500,
-                color = Color.Black, fontSize = 12.sp
+                color = AppTheme.colors.textColor,
+                fontSize = 12.sp
             )
         )
 
@@ -134,7 +136,7 @@ private fun CoffeeInfo(
             modifier = Modifier.weight(0.3f),
             text = "$$price",
             style = TextStyle(
-                color = Color.Black,
+                color = AppTheme.colors.textColor,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold
             )

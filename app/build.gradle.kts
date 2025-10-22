@@ -59,6 +59,7 @@ dependencies {
     implementation(project(":feature:home:data"))
     //Module Detail
     implementation(project(":feature:detail:presentation"))
+    implementation(project(":feature:splash"))
     //Others
     implementation(project(":core:navigation"))
     implementation(project(":core:designsystem"))

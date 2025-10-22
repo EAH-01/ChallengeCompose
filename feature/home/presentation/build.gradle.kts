@@ -52,7 +52,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Design System module
-    implementation(project(":core:designsystem"))
     implementation(project(":core:navigation"))
     implementation(project(":feature:home:domain"))
     implementation(project(":core:ui"))

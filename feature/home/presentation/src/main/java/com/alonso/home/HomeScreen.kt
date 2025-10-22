@@ -1,9 +1,12 @@
 package com.alonso.home
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -36,12 +39,15 @@ fun HomeScreen(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val lazyGridState = rememberLazyGridState()
 
-
+    BackHandler {
+        appNavigator.clearBackStack()
+    }
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.navigationBarsPadding(),
         containerColor = AppTheme.colors.backgroundHome,
         topBar = {
             HomeTopBar(
+                modifier = Modifier.padding(top = 22.dp),
                 categories = uiState.categories,
                 selectedCategory = uiState.selectedCategory,
                 showBanner = lazyGridState.isScrollingDown().value.not(),
@@ -52,7 +58,7 @@ fun HomeScreen(
 
         if (uiState.isLoading) {
             LoadCoffeeList(
-                modifier = modifier
+                modifier = Modifier
                     .padding(innerPadding)
                     .fillMaxSize(), lazyGridState = lazyGridState
             )

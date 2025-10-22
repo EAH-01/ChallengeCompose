@@ -25,13 +25,14 @@ fun CategoryOption(
     isSelected: Boolean = false,
     onClick: () -> Unit = {}
 ) {
-    val backgroundColor = if (isSelected) Color(0xFFF7F6F0)
-    else Color.Transparent
+    val backgroundColor = if (isSelected) AppTheme.colors.optionCategoryBackgroundEnabled
+    else AppTheme.colors.optionCategoryBackgroundDisabled
 
-    val borderColor = if (isSelected) Color(0xFF6B4E3D)
-    else Color(0xFFE0E0E0)
+    val borderColor = if (isSelected) AppTheme.colors.optionCategoryBorderEnabled
+    else AppTheme.colors.optionCategoryBorderDisabled
 
-    val textColor = if (isSelected) Color(0xFF534D46) else Color(0xFF534D46)
+    val textColor = if (isSelected) AppTheme.colors.optionCategoryTextEnabled else
+        AppTheme.colors.optionCategoryTextDisabled
 
 
     Text(

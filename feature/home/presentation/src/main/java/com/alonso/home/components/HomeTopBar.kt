@@ -15,20 +15,18 @@ internal fun HomeTopBar(
     modifier: Modifier = Modifier,
     categories: List<CategoryOption>,
     selectedCategory: String,
-    showBanner: Boolean,
     onClick: (CategoryOption) -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Header(
-            modifier = modifier.padding(12.dp),
-            title = "PICK YOUR COFFEE",
-            subtitle = "Pick Up in store within 30 minutes"
+            modifier = Modifier.padding(horizontal = 12.dp),
+            title = "Coffee Go",
+            subtitle = "Your daily coffee ritual starts here"
         )
-        BannerImage(
-            modifier.padding(12.dp),
-            show = showBanner,
-        )
-        LazyRow(modifier = modifier.padding(bottom = 8.dp)) {
+        LazyRow(
+            modifier = Modifier
+                .padding(vertical = 8.dp)
+        ) {
             items(categories) {
                 CategoryOption(
                     text = it.name,

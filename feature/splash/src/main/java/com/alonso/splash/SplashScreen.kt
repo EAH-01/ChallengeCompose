@@ -1,9 +1,5 @@
-package com.alonso.lab
+package com.alonso.splash
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -16,10 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,29 +26,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.alonso.designsystem.AppTheme
 import com.alonso.designsystem.R
-import com.alonso.lab.ui.theme.ChallengeComposeTheme
+import com.alonso.navigation.AppNavigator
+import com.alonso.navigation.AppScreen
+import com.alonso.navigation.navRoot
 import kotlinx.coroutines.delay
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ChallengeComposeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SplashScreen(modifier = Modifier.padding(innerPadding))
-                }
-            }
-        }
-    }
-}
-
 @Composable
-fun SplashScreen(modifier: Modifier = Modifier) {
+fun SplashScreen(
+    modifier: Modifier = Modifier,
+    appNavigator: AppNavigator = navRoot
+) {
     var animationStarted by remember { mutableStateOf(false) }
 
     // Unified alpha animation that controls both fade-in and scale timing
@@ -67,7 +54,7 @@ fun SplashScreen(modifier: Modifier = Modifier) {
 
     // Scale animation that starts after alpha reaches 1f
     val scale by animateFloatAsState(
-        targetValue = if (animationStarted && alpha >= 0.9f) 1f else 2.5f,
+        targetValue = if (animationStarted && alpha >= 0.9f) 1f else 2.3f,
         animationSpec = tween(durationMillis = 1000),
         label = "scaleAnimation"
     )
@@ -76,12 +63,14 @@ fun SplashScreen(modifier: Modifier = Modifier) {
     LaunchedEffect(Unit) {
         delay(200) // Small delay for better visual effect
         animationStarted = true
+        delay(2000)
+        appNavigator.goTo(AppScreen.Home)
     }
 
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFFF4F5F0)),
+            .background(AppTheme.colors.backgroundSplash),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -90,7 +79,7 @@ fun SplashScreen(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(R.drawable.ic_coffee),
+                painter = painterResource(R.drawable.ic_coffee_bean),
                 contentDescription = "App Logo",
                 modifier = Modifier
                     .size(90.dp)
@@ -103,20 +92,16 @@ fun SplashScreen(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(12.dp))
             AnimatedVisibility(visible = scale < 2f) {
                 Text(
-                    "Challenge Compose", color = Color(0xFF5A270D),
-                    style = TextStyle(fontSize = 18.sp)
+                    "CoffeeGo", color = AppTheme.colors.textIconSplash,
+                    style = TextStyle(
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.roboto_flex))
+                    )
                 )
             }
 
         }
 
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SplashScreenPreview() {
-    ChallengeComposeTheme {
-        SplashScreen()
     }
 }

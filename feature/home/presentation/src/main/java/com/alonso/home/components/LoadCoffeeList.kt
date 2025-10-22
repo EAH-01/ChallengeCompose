@@ -31,7 +31,7 @@ fun LoadCoffeeList(
                     .width(210.dp)
                     .padding(start = 12.dp, top = 12.dp)
                     .height(215.dp)
-                    .clip(shape = RoundedCornerShape(12.dp))
+                    .clip(shape = RoundedCornerShape(18.dp))
             )
         }
     }

@@ -29,19 +29,24 @@ abstract class AppNavigator {
         this.navBackStack = backStack
     }
 
-    abstract fun goTo(key: NavKey, clearBackStack: Boolean = false)
+    abstract fun goTo(key: NavKey)
     abstract fun popBack()
+    abstract fun clearBackStack()
 }
 
 
 class CoffeeNavigator @Inject constructor() : AppNavigator() {
 
-    override fun goTo(key: NavKey, clearBackStack: Boolean) {
-        if (clearBackStack) navBackStack?.clear()
+    override fun goTo(key: NavKey) {
+
         navBackStack?.add(key)
     }
 
     override fun popBack() {
         navBackStack?.removeLastOrNull()
+    }
+
+    override fun clearBackStack() {
+        navBackStack?.clear()
     }
 }
