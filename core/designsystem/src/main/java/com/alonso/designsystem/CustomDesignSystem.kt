@@ -31,7 +31,8 @@ data class CustomColors(
     val optionCategoryBackgroundDisabled: Color,
     val optionCategoryTextDisabled: Color,
     val headerHomeTitle: Color,
-    val headerHomeSubtitle: Color
+    val headerHomeSubtitle: Color,
+    val grayCommon: Color
 )
 
 @Immutable
@@ -47,22 +48,23 @@ val LightColors = CustomColors(
 
     content = Color.Blue,
     backgroundDetails = Color(0xFFDECFC8),
-    backgroundHome = Color(0xFFFEFEFC),
+    backgroundHome = Color(0xFFF9F4EA),
     textColor = Color.Black,
-    coffeeCardBackgroundPrimary = Color(0xFFFFFFFF),
-    coffeeCardBackgroundSecondary = Color(0xFFF5F1EE),
-    coffeeCardBorder = Color(0xFFF5F1EE),
+    coffeeCardBackgroundPrimary = Color(0xFFF9F4EA),
+    coffeeCardBackgroundSecondary = Color(0xFFE6D3C7),
+    coffeeCardBorder = Color(0xFFECE6E2),
 
-    optionCategoryBorderEnabled = Color(0xFF6B4E3D),
-    optionCategoryBackgroundEnabled = Color(0xFFF7F6F0),
-    optionCategoryTextEnabled = Color(0xFF534D46),
+    optionCategoryBorderEnabled = Color(0xFF7d4532),
+    optionCategoryBackgroundEnabled = Color(0xFF7d4532),
+    optionCategoryTextEnabled = Color.White,
 
     optionCategoryBorderDisabled = Color(0xFFE0E0E0),
     optionCategoryBackgroundDisabled = Color.Transparent,
     optionCategoryTextDisabled = Color(0xFF534D46),
 
     headerHomeTitle = Color(0xFF2D231B),
-    headerHomeSubtitle = Color(0xFF655541)
+    headerHomeSubtitle = Color(0xFF655541),
+    grayCommon = Color(0xFF92908e)
 
 )
 
@@ -88,7 +90,8 @@ val DarkColors = CustomColors(
     optionCategoryTextDisabled = Color(0xFFFFFFFF),
 
     headerHomeTitle = Color.White,
-    headerHomeSubtitle = Color.White
+    headerHomeSubtitle = Color.White,
+    grayCommon = Color.White
 )
 val TypographyCoffee = CustomTypography(
     headlineMedium = TextStyle(

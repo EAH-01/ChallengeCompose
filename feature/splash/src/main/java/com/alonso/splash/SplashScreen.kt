@@ -8,10 +8,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -59,7 +57,6 @@ fun SplashScreen(
         label = "scaleAnimation"
     )
 
-    // Start animation on composition
     LaunchedEffect(Unit) {
         delay(200) // Small delay for better visual effect
         animationStarted = true
@@ -74,7 +71,9 @@ fun SplashScreen(
         contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 80.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -89,12 +88,11 @@ fun SplashScreen(
                         alpha = alpha
                     ),
             )
-            Spacer(modifier = Modifier.height(12.dp))
             AnimatedVisibility(visible = scale < 2f) {
                 Text(
                     "CoffeeGo", color = AppTheme.colors.textIconSplash,
                     style = TextStyle(
-                        fontSize = 22.sp,
+                        fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily(Font(R.font.roboto_flex))
                     )

@@ -35,8 +35,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alonso.designsystem.AppTheme
-import com.alonso.designsystem.R
 import com.alonso.navigation.CoffeeItem
+import com.alonso.ui_components.components.CoffeeRating
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -106,32 +106,6 @@ fun CofferDetailsCard(
 
 }
 
-@Composable
-fun CoffeeRating(modifier: Modifier = Modifier, value: String) {
-    Box(
-        modifier = modifier,
-        contentAlignment = Alignment.CenterEnd
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Icon(
-                modifier = Modifier.size(20.dp),
-                painter = painterResource(id = R.drawable.ic_star),
-                tint = Color(0xFFD9A012),
-                contentDescription = null
-            )
-            Text(
-                value, style = TextStyle(
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Medium
-                )
-            )
-        }
-    }
-
-}
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Preview(showBackground = true, name = "Full Screen")

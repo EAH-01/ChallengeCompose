@@ -51,7 +51,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
-
+    implementation(project(":core:designsystem"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
