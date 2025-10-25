@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ChallengeCompose"
+rootProject.name = "CoffeeGo"
 include(":app")
 include(":feature:home:presentation")
 include(":feature:detail:presentation")

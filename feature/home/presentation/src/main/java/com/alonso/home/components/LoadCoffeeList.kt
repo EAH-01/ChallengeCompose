@@ -1,10 +1,15 @@
 package com.alonso.home.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,6 +30,36 @@ fun LoadCoffeeList(
         contentPadding = PaddingValues(end = 12.dp),
         state = lazyGridState,
     ) {
+
+        item(span = { GridItemSpan(2) }) {
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Shimmer(
+                    modifier = Modifier
+                        .padding(vertical = 8.dp, horizontal = 12.dp)
+                        .height(25.dp)
+                        .width(100.dp)
+                )
+
+                LazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ) {
+                    items(10) {
+                        Shimmer(
+                            modifier = Modifier
+                                .padding(horizontal = 6.dp, vertical = 8.dp)
+                                .size(120.dp)
+                                .clip(RoundedCornerShape(16.dp))
+                        )
+                    }
+                }
+            }
+
+        }
+
         items(10) {
             Shimmer(
                 modifier = Modifier

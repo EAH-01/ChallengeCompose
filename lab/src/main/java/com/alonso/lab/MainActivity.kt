@@ -90,7 +90,7 @@ fun SplashScreen(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(R.drawable.ic_coffee),
+                painter = painterResource(R.drawable.ic_coffee_bean),
                 contentDescription = "App Logo",
                 modifier = Modifier
                     .size(90.dp)

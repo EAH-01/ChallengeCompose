@@ -32,18 +32,22 @@ data class CustomColors(
     val optionCategoryTextDisabled: Color,
     val headerHomeTitle: Color,
     val headerHomeSubtitle: Color,
-    val grayCommon: Color
+    val grayCommon: Color,
+    val backgroundNetworkDisconnected: Color
 )
 
 @Immutable
 data class CustomTypography(
     val headlineMedium: TextStyle,
-    val bodyMedium: TextStyle
+    val bodyMedium: TextStyle,
+    val commonRegularTextStyle: TextStyle,
+    val commonMediumTextStyle: TextStyle,
+    val commonBoldTextStyle: TextStyle
 )
 
 
 val LightColors = CustomColors(
-    backgroundSplash = Color(0xFFF4F5F0),
+    backgroundSplash = Color(0xFFF9F4EA),
     textIconSplash = Color(0xFF5A270D),
 
     content = Color.Blue,
@@ -64,7 +68,8 @@ val LightColors = CustomColors(
 
     headerHomeTitle = Color(0xFF2D231B),
     headerHomeSubtitle = Color(0xFF655541),
-    grayCommon = Color(0xFF92908e)
+    grayCommon = Color(0xFF92908e),
+    backgroundNetworkDisconnected = Color(0x49e50a2a)
 
 )
 
@@ -91,7 +96,8 @@ val DarkColors = CustomColors(
 
     headerHomeTitle = Color.White,
     headerHomeSubtitle = Color.White,
-    grayCommon = Color.White
+    grayCommon = Color.White,
+    backgroundNetworkDisconnected = Color(0xFFFF4F6B)
 )
 val TypographyCoffee = CustomTypography(
     headlineMedium = TextStyle(
@@ -107,6 +113,24 @@ val TypographyCoffee = CustomTypography(
         fontSize = 14.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.25.sp
+    ),
+    commonRegularTextStyle = TextStyle(
+        fontSize = 12.sp,
+        fontFamily = FontFamily(Font(R.font.roboto_flex)),
+        fontWeight = FontWeight.Normal
+    ),
+
+    commonMediumTextStyle = TextStyle(
+        fontSize = 12.sp,
+        fontFamily = FontFamily(Font(R.font.roboto_flex)),
+        color = Color.Black,
+        fontWeight = FontWeight.Medium
+    ),
+    commonBoldTextStyle = TextStyle(
+        fontSize = 12.sp,
+        fontFamily = FontFamily(Font(R.font.roboto_flex)),
+        color = Color.Black,
+        fontWeight = FontWeight.Medium
     ),
 )
 

@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -62,10 +63,13 @@ fun BannerImage(
                     .fillMaxSize()
                     .background(
                         brush = Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, Color.Black),
-                            startY = 0f,
-                            endY = 350f
-                        )
+                            colors = listOf(
+                                Color(0x0E181818),
+                                Color(0x51000000),
+                                Color(0xF80E0D0D)
+                            )
+                        ),
+                        shape = RectangleShape,
                     )
             )
             Text(
@@ -82,4 +86,6 @@ fun BannerImage(
             )
         }
     }
+
 }
+

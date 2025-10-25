@@ -5,6 +5,7 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -51,11 +52,10 @@ fun HomeScreen(
         appNavigator.clearBackStack()
     }
     Scaffold(
-        modifier = modifier.navigationBarsPadding(),
+        modifier = modifier,
         containerColor = AppTheme.colors.backgroundHome,
         topBar = {
             HomeTopBar(
-                modifier = Modifier.padding(top = 22.dp),
                 categories = uiState.categories,
                 selectedCategory = uiState.selectedCategory,
                 showBanner = lazyStaggeredGridState.isScrollingDown().value.not(),
