@@ -26,6 +26,7 @@ data class CoffeeItem(
     val image: String,
     val volume: String,
     val qualification: Double,
-    val category: String
+    val category: String,
+    val favorite: Boolean
 )
 

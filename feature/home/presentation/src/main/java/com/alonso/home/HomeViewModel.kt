@@ -34,7 +34,13 @@ class HomeViewModel @Inject constructor(
                 homeUseCase(categoryId).getResult(
                     onSuccess = { data ->
                         data?.let { result ->
-                            _uiState.update { it.copy(coffeeList = result.toCoffeeItem()) }
+                            _uiState.update {
+                                it.copy(
+                                    coffeeList = result.toCoffeeItem(),
+                                    favorites = result
+                                        .filter { coffee -> coffee.favorite }.toCoffeeItem()
+                                )
+                            }
                         }
                     },
                     onError = {

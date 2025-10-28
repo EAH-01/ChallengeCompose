@@ -24,6 +24,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -170,13 +171,14 @@ fun CoffeeCard(
         Box(
             modifier = Modifier
                 .size(100.dp)
+                .clickable(onClick = onClick)
                 .background(
                     color = AppTheme.colors.coffeeCardBackgroundSecondary,
                     shape = RoundedCornerShape(16.dp)
                 ),
             contentAlignment = Alignment.Center
         ) {
-            /// "https://i.postimg.cc/P5WwChHm/cool-lime-refresher.png"
+
             LoadImage(
                 url = imageUrl,
                 modifier = Modifier
@@ -187,6 +189,10 @@ fun CoffeeCard(
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             coffeeName,
+            modifier = Modifier.width(100.dp),
+            maxLines = 2,
+            textAlign = TextAlign.Center,
+            overflow = TextOverflow.Ellipsis,
             style = TextStyle(
                 fontFamily = FontFamily(Font(R.font.roboto_flex)),
                 fontWeight = FontWeight.Medium,

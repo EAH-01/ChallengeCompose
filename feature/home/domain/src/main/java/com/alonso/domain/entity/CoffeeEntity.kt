@@ -8,5 +8,6 @@ data class CoffeeEntity(
     val image: String,
     val ranking: Double,
     val category: String,
-    val volume: String
+    val volume: String,
+    val favorite: Boolean
 )

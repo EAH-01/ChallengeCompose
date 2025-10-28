@@ -18,6 +18,8 @@ data class CoffeeResponse(
     @SerializedName("volume")
     val volume: String,
     @SerializedName("category")
-    val category: String
+    val category: String,
+    @SerializedName("favorite")
+    val favorite: Boolean
 )
 

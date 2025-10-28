@@ -3,10 +3,9 @@ package com.alonso.home
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
@@ -76,17 +75,23 @@ fun HomeScreen(
                     .padding(innerPadding)
                     .fillMaxSize(),
                 columns = StaggeredGridCells.Fixed(2),
-                //contentPadding = PaddingValues(end = 12.dp),
                 state = lazyStaggeredGridState,
             ) {
                 RowCoffeeSection(
                     titleSection = "Favorites",
                     adapter = {
-                        items(5) {
+                        items(uiState.favorites, key = { it.id }) { coffee ->
                             CoffeeCard(
-                                coffeeName = "Coffee Name",
-                                imageUrl = "https://i.postimg.cc/P5WwChHm/cool-lime-refresher.png",
-                                onClick = {}
+                                coffeeName = coffee.name,
+                                imageUrl = coffee.image,
+                                onClick = {
+                                    appNavigator.goTo(
+                                        AppScreen.Detail(
+                                            coffeeClicked = uiState.favorites.indexOf(coffee),
+                                            listCoffee = uiState.favorites
+                                        )
+                                    )
+                                }
                             )
 
                         }

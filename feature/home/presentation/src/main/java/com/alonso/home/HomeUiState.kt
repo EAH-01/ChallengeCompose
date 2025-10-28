@@ -4,6 +4,7 @@ import com.alonso.navigation.CoffeeItem
 
 data class HomeUiState(
     val coffeeList: List<CoffeeItem> = emptyList(),
+    val favorites: List<CoffeeItem> = emptyList(),
     val isLoading: Boolean = false,
     val selectedCategory: String = "all",
     val categories: List<CategoryOption> = listOf(

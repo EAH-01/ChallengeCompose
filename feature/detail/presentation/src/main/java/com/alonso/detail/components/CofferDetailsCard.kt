@@ -112,7 +112,8 @@ private fun CofferDetailsCardPreview() {
             image = "https://static.vecteezy.com/system/resources/previews/048/095/748/non_2x/shot-of-rich-espresso-with-a-creamy-top-png.png",
             qualification = 5.0,
             category = "Cafe",
-            volume = "32lm"
+            volume = "32lm",
+            favorite = false
         ),
     )
 

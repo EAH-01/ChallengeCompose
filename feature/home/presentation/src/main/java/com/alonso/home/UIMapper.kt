@@ -12,6 +12,7 @@ fun List<CoffeeEntity>.toCoffeeItem() = map {
         image = it.image,
         qualification = it.ranking,
         category = it.category,
-        volume = it.volume
+        volume = it.volume,
+        favorite = it.favorite
     )
 }

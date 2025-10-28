@@ -81,7 +81,8 @@ private fun DetailScreenPreview() {
                 image = "https://static.vecteezy.com/system/resources/previews/048/095/748/non_2x/shot-of-rich-espresso-with-a-creamy-top-png.png",
                 qualification = 5.0,
                 category = "Coffee",
-                volume = "32ml"
+                volume = "32ml",
+                favorite = false
             )
         )
     )
