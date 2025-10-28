@@ -7,7 +7,7 @@ import com.alonso.domain.ResultDataEntity
 import com.alonso.domain.accessDataToMap
 
 import com.alonso.domain.entity.CoffeeEntity
-import com.alonso.network.di.network.safeApiCall
+import com.alonso.network.di.network.network.safeApiCall
 import javax.inject.Inject
 
 internal class HomeDataSourceImpl @Inject constructor(
@@ -26,7 +26,8 @@ internal class HomeDataSourceImpl @Inject constructor(
                         image = it.image,
                         ranking = it.ranking,
                         category = it.category,
-                        volume = it.volume
+                        volume = it.volume,
+                        favorite = it.favorite
                     )
                 }
             }

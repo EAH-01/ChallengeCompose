@@ -1,4 +1,4 @@
-package com.alonso.network.di.network
+package com.alonso.network.di.network.network
 
 import android.os.Build
 import androidx.annotation.RequiresApi

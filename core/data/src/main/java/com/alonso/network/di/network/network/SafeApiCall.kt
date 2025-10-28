@@ -1,4 +1,4 @@
-package com.alonso.network.di.network
+package com.alonso.network.di.network.network
 
 import com.alonso.domain.ErrorEntity
 import com.alonso.domain.ResultDataEntity

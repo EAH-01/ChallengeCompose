@@ -1,0 +1,20 @@
+package com.alonso.network.di.network.db
+
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+
+@Dao
+interface CoffeeDao {
+    
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertCoffee(coffee: CoffeeEntity): Long
+
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertCoffees(coffees: List<CoffeeEntity>): List<Long>
+
+    @Query("SELECT EXISTS(SELECT 1 FROM coffee_table LIMIT 1)")
+    suspend fun hasCoffees(): Boolean
+}
