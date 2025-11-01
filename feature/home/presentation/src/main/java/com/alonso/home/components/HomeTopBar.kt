@@ -17,12 +17,15 @@ internal fun HomeTopBar(
     categories: List<CategoryOption>,
     selectedCategory: String,
     showBanner: Boolean,
-    onClick: (CategoryOption) -> Unit
+    onClick: (CategoryOption) -> Unit,
+    onSearchClicked: () -> Unit
+
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Header(
             modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 12.dp),
             title = "Coffee Go",
+            onSearchClicked = onSearchClicked
         )
         BannerImage(
             modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 16.dp),

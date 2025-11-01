@@ -13,7 +13,7 @@ import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
 @Module
-object RepositoryModule {
+object HomeRepositoryModule {
 
     @Provides
     fun provideHomeRepository(

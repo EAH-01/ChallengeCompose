@@ -29,13 +29,14 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alonso.designsystem.AppTheme
 import com.alonso.designsystem.R
-import com.alonso.home.components.CoffeeCard
 import com.alonso.home.components.HomeTopBar
 import com.alonso.home.components.LoadCoffeeList
+import com.alonso.home.components.SecondaryCoffeeCard
 import com.alonso.home.utils.RowCoffeeSection
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
 import com.alonso.navigation.navRoot
+import com.alonso.ui_components.components.PrimaryCoffeeCard
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -58,7 +59,8 @@ fun HomeScreen(
                 categories = uiState.categories,
                 selectedCategory = uiState.selectedCategory,
                 showBanner = lazyStaggeredGridState.isScrollingDown().value.not(),
-                onClick = { viewModel.onSelectCategory(it.id) }
+                onClick = { viewModel.onSelectCategory(it.id) },
+                onSearchClicked = { appNavigator.goTo(AppScreen.Search) }
             )
         }
     ) { innerPadding ->
@@ -81,7 +83,7 @@ fun HomeScreen(
                     titleSection = "Favorites",
                     adapter = {
                         items(uiState.favorites, key = { it.id }) { coffee ->
-                            CoffeeCard(
+                            SecondaryCoffeeCard(
                                 coffeeName = coffee.name,
                                 imageUrl = coffee.image,
                                 onClick = {
@@ -111,8 +113,7 @@ fun HomeScreen(
                 }
 
                 items(uiState.coffeeList, key = { it.id }) { coffee ->
-                    CoffeeCard(
-                        // modifier = Modifier.padding(start = 12.dp, top = 12.dp),
+                    PrimaryCoffeeCard(
                         modifier = Modifier.padding(8.dp),
                         coffeeName = coffee.name,
                         price = coffee.price.toString(),

@@ -36,6 +36,10 @@
             <option value="$PROJECT_DIR$/feature/home/data" />
             <option value="$PROJECT_DIR$/feature/home/domain" />
             <option value="$PROJECT_DIR$/feature/home/presentation" />
+            <option value="$PROJECT_DIR$/feature/search" />
+            <option value="$PROJECT_DIR$/feature/search/data" />
+            <option value="$PROJECT_DIR$/feature/search/domain" />
+            <option value="$PROJECT_DIR$/feature/search/presentation" />
             <option value="$PROJECT_DIR$/feature/splash" />
             <option value="$PROJECT_DIR$/lab" />
           </set>

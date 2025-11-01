@@ -53,10 +53,17 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(project(":core:ui"))
+
     //Module Home
     implementation(project(":feature:home:presentation"))
     implementation(project(":feature:home:domain"))
     implementation(project(":feature:home:data"))
+
+    //Module Search
+    implementation(project(":feature:search:presentation"))
+    implementation(project(":feature:search:domain"))
+    implementation(project(":feature:search:data"))
+
     //Module Detail
     implementation(project(":feature:detail:presentation"))
     implementation(project(":feature:splash"))

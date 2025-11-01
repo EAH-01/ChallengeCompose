@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 data class CustomColors(
     val content: Color,
     val backgroundSplash: Color,
+
     val textIconSplash: Color,
     val backgroundHome: Color,
     val backgroundDetails: Color,
@@ -33,7 +34,9 @@ data class CustomColors(
     val headerHomeTitle: Color,
     val headerHomeSubtitle: Color,
     val grayCommon: Color,
-    val backgroundNetworkDisconnected: Color
+    val backgroundNetworkDisconnected: Color,
+    val backgroundSearchBar: Color,
+    val iconTint: Color,
 )
 
 @Immutable
@@ -69,7 +72,9 @@ val LightColors = CustomColors(
     headerHomeTitle = Color(0xFF2D231B),
     headerHomeSubtitle = Color(0xFF655541),
     grayCommon = Color(0xFF92908e),
-    backgroundNetworkDisconnected = Color(0x49e50a2a)
+    backgroundNetworkDisconnected = Color(0x49e50a2a),
+    backgroundSearchBar= Color(0xFFF3E9DF),
+    iconTint = Color(0xFF000000)
 
 )
 
@@ -97,7 +102,9 @@ val DarkColors = CustomColors(
     headerHomeTitle = Color.White,
     headerHomeSubtitle = Color.White,
     grayCommon = Color.White,
-    backgroundNetworkDisconnected = Color(0xFFFF4F6B)
+    backgroundNetworkDisconnected = Color(0xFFFF4F6B),
+    backgroundSearchBar= Color(0xFF272B30),
+    iconTint = Color(0xFFFFFFFF)
 )
 val TypographyCoffee = CustomTypography(
     headlineMedium = TextStyle(

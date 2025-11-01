@@ -7,7 +7,7 @@ import androidx.room.Query
 
 @Dao
 interface CoffeeDao {
-    
+
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertCoffee(coffee: CoffeeEntity): Long
 
@@ -17,4 +17,15 @@ interface CoffeeDao {
 
     @Query("SELECT EXISTS(SELECT 1 FROM coffee_table LIMIT 1)")
     suspend fun hasCoffees(): Boolean
+
+
+    @Query(
+        """
+        SELECT * FROM coffee_table 
+        WHERE name LIKE '%' || :searchQuery || '%'
+        OR category LIKE '%' || :searchQuery || '%'
+    """
+    )
+    suspend fun searchCoffee(searchQuery: String): List<CoffeeEntity>
+
 }

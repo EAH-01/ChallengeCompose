@@ -8,6 +8,9 @@ sealed interface AppScreen : NavKey {
     data object Home : NavKey
 
     @Serializable
+    data object Search : NavKey
+
+    @Serializable
     data object Splash : NavKey
 
     @Serializable

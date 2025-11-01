@@ -27,6 +27,7 @@ import com.alonso.detail.DetailScreen
 import com.alonso.home.HomeScreen
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
+import com.alonso.search.SearchScreen
 import com.alonso.splash.SplashScreen
 import com.alonso.ui_components.base.Loader
 import com.alonso.ui_components.components.LoaderModal
@@ -78,6 +79,7 @@ class MainActivity : ComponentActivity() {
                                     coffeeClicked = it.coffeeClicked
                                 )
                             }
+                            entry<AppScreen.Search> { SearchScreen() }
                         },
                         transitionSpec = {
                             ContentTransform(
