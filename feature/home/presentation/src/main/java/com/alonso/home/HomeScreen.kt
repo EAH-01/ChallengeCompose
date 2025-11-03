@@ -36,6 +36,7 @@ import com.alonso.home.utils.RowCoffeeSection
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
 import com.alonso.navigation.navRoot
+import com.alonso.ui_components.components.AlertDialogError
 import com.alonso.ui_components.components.PrimaryCoffeeCard
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -46,8 +47,17 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
+    val event = viewModel.event.collectAsStateWithLifecycle(HomeEvent.Init).value
     val lazyStaggeredGridState = rememberLazyStaggeredGridState()
 
+    when (event) {
+        HomeEvent.Init -> Unit
+        HomeEvent.ErrorToAccessData -> {
+            AlertDialogError(
+                onRetry = { viewModel.closeDialog() }
+            )
+        }
+    }
     BackHandler {
         appNavigator.clearBackStack()
     }

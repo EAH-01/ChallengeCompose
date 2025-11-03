@@ -7,8 +7,11 @@ import com.alonso.domain.getResult
 import com.alonso.navigation.CoffeeItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -22,6 +25,8 @@ class SearchViewModel @Inject constructor(
     private val _state = MutableStateFlow(SearchState())
     val state: StateFlow<SearchState> = _state.asStateFlow()
 
+    private val _event = MutableSharedFlow<SearchEvent>()
+    val event = _event.asSharedFlow()
     fun searchCoffeeByName(value: String = "a") {
         if (value.isEmpty()) return
         viewModelScope.launch(Dispatchers.IO) {
@@ -48,7 +53,7 @@ class SearchViewModel @Inject constructor(
 
                 },
                 onError = {
-
+                    _event.emit(SearchEvent.ErrorToAccessData)
                 }
             )
         }.invokeOnCompletion {
@@ -59,5 +64,11 @@ class SearchViewModel @Inject constructor(
 
     fun setCoffeeToSearch(value: String) {
         _state.update { it.copy(coffeeToSearch = value) }
+    }
+
+    fun closeDialog() {
+        viewModelScope.launch {
+            _event.emit(SearchEvent.Init)
+        }
     }
 }

@@ -79,7 +79,9 @@ class MainActivity : ComponentActivity() {
                                     coffeeClicked = it.coffeeClicked
                                 )
                             }
-                            entry<AppScreen.Search> { SearchScreen() }
+                            entry<AppScreen.Search> {
+                                SearchScreen(modifier = Modifier.padding(top = innerPadding.calculateTopPadding()))
+                            }
                         },
                         transitionSpec = {
                             ContentTransform(

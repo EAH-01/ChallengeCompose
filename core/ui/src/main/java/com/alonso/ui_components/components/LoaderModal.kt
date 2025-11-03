@@ -8,11 +8,11 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
+import com.alonso.designsystem.AppTheme
 
 @Composable
 fun LoaderModal(isShow: Boolean) {
@@ -24,11 +24,11 @@ fun LoaderModal(isShow: Boolean) {
 }
 
 @Composable
-fun ContentLoader() {
+fun ContentLoader(modifier: Modifier = Modifier) {
     Box(
-        Modifier
+        modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(AppTheme.colors.backgroundHome),
         contentAlignment = Alignment.Center,
         content = {
             CircularProgressIndicator()

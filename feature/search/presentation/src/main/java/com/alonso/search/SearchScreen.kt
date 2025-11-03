@@ -2,27 +2,23 @@ package com.alonso.search
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alonso.designsystem.AppTheme
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
 import com.alonso.navigation.navRoot
 import com.alonso.search.components.SearchBar
+import com.alonso.ui_components.components.AlertDialogError
+import com.alonso.ui_components.components.ContentLoader
 import com.alonso.ui_components.components.PrimaryCoffeeCard
 
 @Composable
@@ -32,7 +28,19 @@ fun SearchScreen(
     viewModel: SearchViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.state.collectAsStateWithLifecycle().value
+    val event = viewModel.event.collectAsStateWithLifecycle(SearchEvent.Init).value
     uiState.coffeeToSearch.useDebounce { viewModel.searchCoffeeByName(it) }
+
+
+    when (event) {
+        SearchEvent.Init -> Unit
+        SearchEvent.ErrorToAccessData -> {
+            AlertDialogError(
+                onRetry = { viewModel.closeDialog() }
+            )
+        }
+    }
+
     Scaffold(
         topBar = {
             SearchBar(
@@ -43,12 +51,12 @@ fun SearchScreen(
             )
         },
         containerColor = AppTheme.colors.backgroundHome,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-            .safeContentPadding()
     ) { innerPadding ->
-
-        LazyVerticalStaggeredGrid(
+        if (uiState.isLoading)
+            ContentLoader(modifier = modifier.padding(innerPadding))
+        else LazyVerticalStaggeredGrid(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize(),
