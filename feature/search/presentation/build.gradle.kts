@@ -9,11 +9,11 @@ plugins {
 android {
     namespace = "com.alonso.presentation"
     compileSdk {
-        version = release(36)
+        version = release(ProjectConfig.compileSdk)
     }
 
     defaultConfig {
-        minSdk = 24
+        minSdk = ProjectConfig.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
