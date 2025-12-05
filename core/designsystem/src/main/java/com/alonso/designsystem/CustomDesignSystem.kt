@@ -6,6 +6,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -37,6 +38,7 @@ data class CustomColors(
     val backgroundNetworkDisconnected: Color,
     val backgroundSearchBar: Color,
     val iconTint: Color,
+    val brush: Brush,
 )
 
 @Immutable
@@ -74,8 +76,14 @@ val LightColors = CustomColors(
     grayCommon = Color(0xFF92908e),
     backgroundNetworkDisconnected = Color(0x49e50a2a),
     backgroundSearchBar= Color(0xFFF3E9DF),
-    iconTint = Color(0xFF000000)
-
+    iconTint = Color(0xFF000000),
+    brush = Brush.verticalGradient(
+        colors = listOf(
+            Color(0x03FCF7F4),
+            Color(0x4DF9F4EA),
+            Color(0xF7F9F4EA)
+        )
+    )
 )
 
 val DarkColors = CustomColors(
@@ -104,7 +112,14 @@ val DarkColors = CustomColors(
     grayCommon = Color.White,
     backgroundNetworkDisconnected = Color(0xFFFF4F6B),
     backgroundSearchBar= Color(0xFF272B30),
-    iconTint = Color(0xFFFFFFFF)
+    iconTint = Color(0xFFFFFFFF),
+    brush = Brush.verticalGradient(
+        colors = listOf(
+            Color(0x030C1015),
+            Color(0x4D0C1015),
+            Color(0xF70C1015)
+        )
+    )
 )
 val TypographyCoffee = CustomTypography(
     headlineMedium = TextStyle(

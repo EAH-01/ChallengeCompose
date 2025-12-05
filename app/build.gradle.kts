@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "com.alonso.challengecompose"
-    compileSdk = 36
+    compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
         applicationId = "com.alonso.challengecompose"
-        minSdk = 24
-        targetSdk = 36
+        minSdk = ProjectConfig.minSdk
+        targetSdk = ProjectConfig.targetSdk
         versionCode = 1
         versionName = "1.0"
 
@@ -22,6 +22,7 @@ android {
     }
 
     buildTypes {
+        1
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -54,19 +55,22 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(project(":core:ui"))
 
+    //Module Dashboard
+    implementation(project(":feature:dashboard:presentation"))
+
     //Module Home
-    implementation(project(":feature:home:presentation"))
+    implementation(project(":feature:home:presentation")) // <-
     implementation(project(":feature:home:domain"))
     implementation(project(":feature:home:data"))
 
     //Module Search
-    implementation(project(":feature:search:presentation"))
+    implementation(project(":feature:search:presentation"))//<-
     implementation(project(":feature:search:domain"))
     implementation(project(":feature:search:data"))
 
     //Module Detail
     implementation(project(":feature:detail:presentation"))
-    implementation(project(":feature:splash"))
+    implementation(project(":feature:splash:presentation"))
     //Others
     implementation(project(":core:navigation"))
     implementation(project(":core:designsystem"))

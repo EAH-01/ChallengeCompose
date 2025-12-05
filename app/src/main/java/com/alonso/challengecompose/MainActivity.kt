@@ -24,9 +24,9 @@ import com.alonso.challengecompose.ui.theme.AppTheme
 import com.alonso.challengecompose.utils.connectivityState
 import com.alonso.designsystem.AppTheme
 import com.alonso.detail.DetailScreen
-import com.alonso.home.HomeScreen
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
+import com.alonso.presentation.DashboardScreen
 import com.alonso.search.SearchScreen
 import com.alonso.splash.SplashScreen
 import com.alonso.ui_components.base.Loader
@@ -67,9 +67,7 @@ class MainActivity : ComponentActivity() {
                         backStack = backStack,
                         onBack = { composeNavigator.popBack() },
                         entryProvider = entryProvider {
-                            entry<AppScreen.Home> {
-                                HomeScreen(modifier = Modifier.padding(top = innerPadding.calculateTopPadding()))
-                            }
+                            entry<AppScreen.Dashboard> { DashboardScreen() }
                             entry<AppScreen.Splash> {
                                 SplashScreen()
                             }

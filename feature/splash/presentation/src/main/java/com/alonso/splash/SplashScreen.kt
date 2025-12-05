@@ -61,7 +61,7 @@ fun SplashScreen(
         delay(200) // Small delay for better visual effect
         animationStarted = true
         delay(2000)
-        appNavigator.goTo(AppScreen.Home)
+        appNavigator.goTo(AppScreen.Dashboard)
     }
 
     Box(

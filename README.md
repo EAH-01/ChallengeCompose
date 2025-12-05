@@ -9,7 +9,9 @@
 
 <p align="center">An intuitive app that allows you to browse and search for typical coffee shop products, including classic coffee, cold coffee, refreshments, and teas, with information on prices, descriptions, and ratings to help you choose the best option.</h4>
 
-
+This design I have implemented is inspired by :
+- https://dribbble.com/shots/25202503-Java-Caf-Coffee-App-Design
+- https://mx.pinterest.com/pin/858850591488328167/
 
 ## Built With
 

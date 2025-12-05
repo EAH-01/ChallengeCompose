@@ -1,5 +1,6 @@
 package com.alonso.search
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -47,6 +48,7 @@ fun SearchScreen(
                 textChange = { viewModel.setCoffeeToSearch(it) },
                 modifier = Modifier.padding(12.dp),
                 textValue = uiState.coffeeToSearch,
+                autofocus = true,
                 onSearch = {}
             )
         },
@@ -54,9 +56,20 @@ fun SearchScreen(
         modifier = modifier
             .fillMaxSize()
     ) { innerPadding ->
-        if (uiState.isLoading)
-            ContentLoader(modifier = modifier.padding(innerPadding))
-        else LazyVerticalStaggeredGrid(
+        ContentCoffeeList(uiState, innerPadding, appNavigator)
+    }
+}
+
+@Composable
+private fun ContentCoffeeList(
+    uiState: SearchState,
+    innerPadding: PaddingValues,
+    appNavigator: AppNavigator
+) {
+    if (uiState.isLoading) {
+        ContentLoader(modifier = Modifier.padding(innerPadding))
+    } else {
+        LazyVerticalStaggeredGrid(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize(),

@@ -2,7 +2,12 @@ package com.alonso.home
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.captionBarPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.items
@@ -17,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -35,6 +41,7 @@ import com.alonso.home.components.SecondaryCoffeeCard
 import com.alonso.home.utils.RowCoffeeSection
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
+import com.alonso.navigation.CoffeeItem
 import com.alonso.navigation.navRoot
 import com.alonso.ui_components.components.AlertDialogError
 import com.alonso.ui_components.components.PrimaryCoffeeCard
@@ -62,7 +69,7 @@ fun HomeScreen(
         appNavigator.clearBackStack()
     }
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.captionBarPadding(),
         containerColor = AppTheme.colors.backgroundHome,
         topBar = {
             HomeTopBar(
@@ -78,73 +85,103 @@ fun HomeScreen(
         if (uiState.isLoading) {
             LoadCoffeeList(
                 modifier = Modifier
-                    .padding(innerPadding)
+                    .padding(top = innerPadding.calculateTopPadding())
+                    // .padding(innerPadding)
                     .fillMaxSize(), lazyGridState = rememberLazyGridState()
             )
         } else {
-            LazyVerticalStaggeredGrid(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .fillMaxSize(),
-                columns = StaggeredGridCells.Fixed(2),
+
+            ContentCoffeeList(
+                modifier = Modifier.padding(top = innerPadding.calculateTopPadding()),
+              //  modifier = Modifier.padding(innerPadding),
                 state = lazyStaggeredGridState,
-            ) {
-                RowCoffeeSection(
-                    titleSection = "Favorites",
-                    adapter = {
-                        items(uiState.favorites, key = { it.id }) { coffee ->
-                            SecondaryCoffeeCard(
-                                coffeeName = coffee.name,
-                                imageUrl = coffee.image,
-                                onClick = {
-                                    appNavigator.goTo(
-                                        AppScreen.Detail(
-                                            coffeeClicked = uiState.favorites.indexOf(coffee),
-                                            listCoffee = uiState.favorites
-                                        )
-                                    )
-                                }
-                            )
-
-                        }
-                    }
-                )
-                item(span = StaggeredGridItemSpan.FullLine) {
-                    Text(
-                        "Our products",
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-                        style = TextStyle(
-                            color = AppTheme.colors.textColor,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily(Font(R.font.roboto_flex))
-                        )
-                    )
-                }
-
-                items(uiState.coffeeList, key = { it.id }) { coffee ->
-                    PrimaryCoffeeCard(
-                        modifier = Modifier.padding(8.dp),
-                        coffeeName = coffee.name,
-                        price = coffee.price.toString(),
-                        volume = coffee.volume,
-                        qualification = coffee.qualification,
-                        onClick = {
-                            appNavigator.goTo(
-                                AppScreen.Detail(
-                                    coffeeClicked = uiState.coffeeList.indexOf(coffee),
-                                    listCoffee = uiState.coffeeList
-                                )
-                            )
-                        },
-                        imageUrl = coffee.image
-                    )
-                }
-            }
+                coffeeList = uiState.coffeeList,
+                favorites = uiState.favorites,
+                appNavigator = appNavigator
+            )
         }
     }
 }
 
+@Composable
+private fun ContentCoffeeList(
+    modifier: Modifier = Modifier,
+    state: LazyStaggeredGridState,
+    coffeeList: List<CoffeeItem>,
+    favorites: List<CoffeeItem>,
+    appNavigator: AppNavigator
+
+) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+    ) {
+        LazyVerticalStaggeredGrid(
+            columns = StaggeredGridCells.Fixed(2),
+            state = state,
+        ) {
+            RowCoffeeSection(
+                titleSection = "Favorites",
+                adapter = {
+                    items(favorites, key = { it.id }) { coffee ->
+                        SecondaryCoffeeCard(
+                            coffeeName = coffee.name,
+                            imageUrl = coffee.image,
+                            onClick = {
+                                appNavigator.goTo(
+                                    AppScreen.Detail(
+                                        coffeeClicked = favorites.indexOf(coffee),
+                                        listCoffee = favorites
+                                    )
+                                )
+                            }
+                        )
+
+                    }
+                }
+            )
+            item(span = StaggeredGridItemSpan.FullLine) {
+                Text(
+                    "Our products",
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                    style = TextStyle(
+                        color = AppTheme.colors.textColor,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.roboto_flex))
+                    )
+                )
+            }
+            items(coffeeList, key = { it.id }) { coffee ->
+                PrimaryCoffeeCard(
+                    modifier = Modifier.padding(8.dp),
+                    coffeeName = coffee.name,
+                    price = coffee.price.toString(),
+                    volume = coffee.volume,
+                    qualification = coffee.qualification,
+                    onClick = {
+                        appNavigator.goTo(
+                            AppScreen.Detail(
+                                coffeeClicked = coffeeList.indexOf(coffee),
+                                listCoffee = coffeeList
+                            )
+                        )
+                    },
+                    imageUrl = coffee.image
+                )
+            }
+        }
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .background(
+                    brush = AppTheme.colors.brush,
+                )
+                .height(80.dp)
+        )
+    }
+}
 
 @Composable
 private fun LazyStaggeredGridState.isScrollingDown() = remember {
