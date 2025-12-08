@@ -10,32 +10,26 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.captionBarPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContent
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -45,78 +39,132 @@ import com.alonso.designsystem.AppTheme
 import com.alonso.home.HomeScreen
 import com.alonso.search.SearchScreen
 
+@Composable
+fun DashboardScreen(modifier: Modifier = Modifier) {
+    var currentDestination by rememberSaveable { mutableStateOf(BottomNavItem.OverviewScreen.path) }
+
+    val navItems = remember {
+        listOf(
+            BottomNavItem.OverviewScreen,
+            BottomNavItem.SearchScreen,
+            BottomNavItem.FavoriteScreen,
+            BottomNavItem.SettingScreen
+        )
+    }
+
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(AppTheme.colors.backgroundHome),
+    ) {
+        DashboardContent(
+            currentDestination = currentDestination,
+            modifier = Modifier.fillMaxSize()
+        )
+
+        DashboardBottomBar(
+            navItems = navItems,
+            currentDestination = currentDestination,
+            onNavigate = { currentDestination = it },
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
+    }
+}
 
 @Composable
-fun DashboardScreen() {
+private fun DashboardContent(
+    currentDestination: String,
+    modifier: Modifier = Modifier
+) {
+    AnimatedContent(
+        modifier = modifier,
+        targetState = currentDestination,
+        transitionSpec = {
+            fadeIn(tween(durationMillis = 200)) togetherWith fadeOut(tween(durationMillis = 200))
+        },
+        label = "DashboardContentAnimation"
+    ) { destination ->
+        when (destination) {
+            BottomNavItem.OverviewScreen.path -> HomeScreen()
+            BottomNavItem.FavoriteScreen.path -> FavoriteScreen()
+            BottomNavItem.SearchScreen.path -> SearchScreen()
+            BottomNavItem.SettingScreen.path -> EmptyScreen("Settings")
+            else -> HomeScreen()
+        }
+    }
+}
 
-    var clickItemSelect by rememberSaveable { mutableStateOf(BottomNavItem.OverviewScreen.path) }
-    Scaffold(
-        modifier = Modifier.statusBarsPadding(),
-        containerColor = AppTheme.colors.backgroundHome,
-        bottomBar = { BottomNavigationBar { clickItemSelect = it } }
-    ) {
-        AnimatedContent(
-            modifier = Modifier.padding(it),
-            targetState = clickItemSelect,
-            transitionSpec = {
-                fadeIn(tween(durationMillis = 100)) togetherWith fadeOut(tween(durationMillis = 100))
-            },
-            label = "Content Animation"
-        ) { itemSelect ->
-            when (itemSelect) {
-                BottomNavItem.OverviewScreen.path -> HomeScreen()
-                BottomNavItem.FavoriteScreen.path -> EmptyScreen("Favorite")
-                BottomNavItem.SearchScreen.path -> SearchScreen()
-                BottomNavItem.SettingScreen.path -> EmptyScreen("Setting")
+@Composable
+private fun DashboardBottomBar(
+    navItems: List<BottomNavItem>,
+    currentDestination: String,
+    onNavigate: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val isOverlayVisible = currentDestination != BottomNavItem.SettingScreen.path
 
+    Column(modifier = modifier) {
+        // Gradient/Brush overlay
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp)
+                .alpha(if (isOverlayVisible) 1f else 0f)
+                .background(brush = AppTheme.colors.brush)
+        )
+
+        NavigationBar(
+            containerColor = AppTheme.colors.backgroundHome,
+            contentColor = Color.Transparent,
+            tonalElevation = 0.dp
+        ) {
+            navItems.forEach { item ->
+                val isSelected = currentDestination == item.path
+                NavigationBarItem(
+                    selected = isSelected,
+                    onClick = { onNavigate(item.path) },
+                    icon = {
+                        BottomNavIcon(
+                            icon = item.icon,
+                            title = item.title,
+                            isSelected = isSelected
+                        )
+                    },
+                    label = {
+                        BottomNavLabel(
+                            title = item.title,
+                            isSelected = isSelected
+                        )
+                    },
+                    alwaysShowLabel = true,
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = Color.Transparent,
+                        selectedIconColor = AppTheme.colors.optionCategoryBackgroundEnabled,
+                        unselectedIconColor = Color(0xFF878787),
+                        selectedTextColor = AppTheme.colors.optionCategoryBackgroundEnabled,
+                        unselectedTextColor = Color(0xFF878787)
+                    )
+                )
             }
         }
     }
 }
 
 @Composable
-private fun BottomNavigationBar(
-    onItemClick: (String) -> Unit,
+private fun BottomNavLabel(
+    title: String,
+    isSelected: Boolean
 ) {
-    var selectedItem by rememberSaveable { mutableIntStateOf(0) }
-    val navItems = listOf(
-        BottomNavItem.OverviewScreen,
-        BottomNavItem.SearchScreen,
-        BottomNavItem.FavoriteScreen,
-        BottomNavItem.SettingScreen
-    )
+    val color = if (isSelected) AppTheme.colors.optionCategoryBackgroundEnabled else Color(0xFF878787)
+    val fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
 
-    NavigationBar(
-        containerColor = AppTheme.colors.backgroundHome
-    ) {
-        navItems.forEachIndexed { index, item ->
-            NavigationBarItem(
-                alwaysShowLabel = true,
-                icon = { HandleIconStyle(selectedItem, index, item) },
-                label = { HandleLabelStyle(selectedItem, index, item) },
-                selected = false,
-                onClick = {
-                    selectedItem = index
-                    onItemClick(item.path)
-                }
-            )
-        }
-    }
-}
-
-
-@Composable
-private fun HandleLabelStyle(selectedItem: Int, index: Int, item: BottomNavItem) {
-    val color = if (selectedItem == index) AppTheme.colors.optionCategoryBackgroundEnabled
-    else Color(0xFF878787)
-    val fontWeight = if (selectedItem == index) FontWeight(800) else null
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
-            text = item.title,
+            text = title,
             style = AppTheme.typography.commonRegularTextStyle.copy(
                 color = color,
                 fontSize = 10.sp,
@@ -128,31 +176,25 @@ private fun HandleLabelStyle(selectedItem: Int, index: Int, item: BottomNavItem)
         Spacer(modifier = Modifier.height(6.dp))
         Box(
             modifier = Modifier
-                .alpha(if (selectedItem == index) 1f else 0f)
                 .width(10.dp)
                 .height(2.dp)
+                .alpha(if (isSelected) 1f else 0f)
                 .background(color, shape = RoundedCornerShape(50))
         )
     }
 }
 
 @Composable
-private fun HandleIconStyle(selectedItem: Int, index: Int, item: BottomNavItem) {
-    val color = if (selectedItem == index) AppTheme.colors.optionCategoryBackgroundEnabled
-    else Color(0xFF878787)
+private fun BottomNavIcon(
+    icon: Int,
+    title: String,
+    isSelected: Boolean
+) {
+    val color = if (isSelected) AppTheme.colors.optionCategoryBackgroundEnabled else Color(0xFF878787)
     Icon(
-        painter = painterResource(id = item.icon),
-        contentDescription = item.title,
+        painter = painterResource(id = icon),
+        contentDescription = title,
         tint = color
-    )
-}
-
-private fun DrawScope.drawTopBorder(color: Color, strokeWidth: Float) {
-    drawLine(
-        color = color,
-        start = Offset(0f, 0f),
-        end = Offset(size.width, 0f),
-        strokeWidth = strokeWidth
     )
 }
 
@@ -164,6 +206,6 @@ fun EmptyScreen(title: String) {
             .background(Color.Yellow),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = title, modifier = Modifier.align(Alignment.Center))
+        Text(text = title)
     }
 }

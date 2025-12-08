@@ -34,6 +34,10 @@
             <option value="$PROJECT_DIR$/feature/dashboard/presentation" />
             <option value="$PROJECT_DIR$/feature/detail" />
             <option value="$PROJECT_DIR$/feature/detail/presentation" />
+            <option value="$PROJECT_DIR$/feature/favorite" />
+            <option value="$PROJECT_DIR$/feature/favorite/data" />
+            <option value="$PROJECT_DIR$/feature/favorite/domain" />
+            <option value="$PROJECT_DIR$/feature/favorite/presentation" />
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/home/data" />
             <option value="$PROJECT_DIR$/feature/home/domain" />

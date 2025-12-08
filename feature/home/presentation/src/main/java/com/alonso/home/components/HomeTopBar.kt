@@ -23,7 +23,7 @@ internal fun HomeTopBar(
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Header(
-            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 4.dp),
+            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 0.dp, bottom = 4.dp),
             title = "Coffee Go",
             onSearchClicked = onSearchClicked
         )

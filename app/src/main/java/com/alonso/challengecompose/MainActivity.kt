@@ -67,7 +67,13 @@ class MainActivity : ComponentActivity() {
                         backStack = backStack,
                         onBack = { composeNavigator.popBack() },
                         entryProvider = entryProvider {
-                            entry<AppScreen.Dashboard> { DashboardScreen() }
+                            entry<AppScreen.Dashboard> {
+                                DashboardScreen(
+                                    modifier = Modifier.padding(
+                                        top = innerPadding.calculateTopPadding()
+                                    )
+                                )
+                            }
                             entry<AppScreen.Splash> {
                                 SplashScreen()
                             }
