@@ -28,4 +28,7 @@ interface CoffeeDao {
     )
     suspend fun searchCoffee(searchQuery: String): List<CoffeeEntity>
 
+    @Query("SELECT * FROM coffee_table WHERE favorite = 1")
+    suspend fun getFavoriteCoffees(): List<CoffeeEntity>
+
 }

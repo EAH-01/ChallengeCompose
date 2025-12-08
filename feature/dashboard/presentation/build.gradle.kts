@@ -53,6 +53,7 @@ dependencies {
 
     implementation(project(":feature:home:presentation"))
     implementation(project(":feature:search:presentation"))
+    implementation(project(":feature:favorite:presentation"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
