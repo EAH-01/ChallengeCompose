@@ -1,4 +1,4 @@
-package com.alonso.network
+package com.alonso.data
 
 import org.junit.Test
 

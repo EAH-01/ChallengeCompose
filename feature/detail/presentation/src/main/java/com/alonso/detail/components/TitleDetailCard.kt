@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 
 @Composable
 fun TitleDetailCard(
@@ -70,7 +70,7 @@ private fun ProductName(
 ) {
     Text(
         text = name,
-        style = AppTheme.typography.headlineMedium,
+        style = CoffeeGoTheme.typography.headlineMedium,
         maxLines = 2,
         overflow = TextOverflow.Ellipsis,
         modifier = modifier
@@ -114,7 +114,7 @@ private fun PriceText(
 ) {
     Text(
         text = "$${"%.2f".format(price)}",
-        style = AppTheme.typography.headlineMedium.copy(
+        style = CoffeeGoTheme.typography.headlineMedium.copy(
             fontWeight = FontWeight.Bold
         ),
         color = Color.Black,

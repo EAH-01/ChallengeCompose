@@ -50,10 +50,12 @@ dependencies {
 
     implementation(libs.androidx.navigation3.runtime)
     implementation(project(":core:designsystem"))
+    implementation(project(":core:ui"))
 
     implementation(project(":feature:home:presentation"))
     implementation(project(":feature:search:presentation"))
     implementation(project(":feature:favorite:presentation"))
+    implementation(project(":feature:setting:presentation"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

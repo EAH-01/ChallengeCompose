@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.designsystem.R
 
 @Composable
@@ -36,7 +36,7 @@ fun Header(
             text = title,
             modifier = Modifier,
             style = TextStyle(
-                color = AppTheme.colors.headerHomeTitle,
+                color = CoffeeGoTheme.colors.headerHomeTitle,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily(Font(R.font.roboto_flex))
@@ -46,7 +46,7 @@ fun Header(
             Icon(
                 painter = painterResource(R.drawable.ic_search),
                 contentDescription = "",
-                tint = AppTheme.colors.iconTint,
+                tint = CoffeeGoTheme.colors.iconTint,
                 modifier = Modifier.size(27.dp)
             )
         }

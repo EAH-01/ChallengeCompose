@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.designsystem.R
 
 
@@ -32,7 +32,7 @@ fun NetworkMessageBar(modifier: Modifier = Modifier, isConnected: Boolean) {
     ) {
         Row(
             modifier = modifier
-                .background(color = AppTheme.colors.backgroundNetworkDisconnected)
+                .background(color = CoffeeGoTheme.colors.backgroundNetworkDisconnected)
                 .fillMaxWidth()
                 .padding(vertical = 10.dp, horizontal = 20.dp),
             horizontalArrangement = Arrangement.Center,
@@ -45,7 +45,7 @@ fun NetworkMessageBar(modifier: Modifier = Modifier, isConnected: Boolean) {
             Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = "Te has desconectado. Comprueba la conexión a internet.",
-                style = AppTheme.typography.commonMediumTextStyle.copy(fontWeight = FontWeight(700))
+                style = CoffeeGoTheme.typography.commonMediumTextStyle.copy(fontWeight = FontWeight(700))
             )
         }
     }

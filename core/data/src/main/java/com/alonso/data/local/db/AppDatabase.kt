@@ -1,4 +1,4 @@
-package com.alonso.network.di.network.db
+package com.alonso.data.local.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Database

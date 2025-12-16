@@ -27,7 +27,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.designsystem.R
 import com.alonso.ui_components.components.LoadImage
 
@@ -52,7 +52,7 @@ fun SecondaryCoffeeCard(
                     onClick = onClick
                 )
                 .background(
-                    color = AppTheme.colors.coffeeCardBackgroundSecondary,
+                    color = CoffeeGoTheme.colors.coffeeCardBackgroundSecondary,
                     shape = RoundedCornerShape(16.dp)
                 ),
             contentAlignment = Alignment.Center
@@ -75,7 +75,7 @@ fun SecondaryCoffeeCard(
             style = TextStyle(
                 fontFamily = FontFamily(Font(R.font.roboto_flex)),
                 fontWeight = FontWeight.Medium,
-                color = AppTheme.colors.textColor,
+                color = CoffeeGoTheme.colors.textColor,
                 fontSize = 12.sp
             )
         )

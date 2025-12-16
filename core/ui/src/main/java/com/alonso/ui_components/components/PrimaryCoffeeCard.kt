@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,7 +26,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.designsystem.R
 
 @Composable
@@ -53,11 +52,11 @@ fun PrimaryCoffeeCard(
             .wrapContentHeight()
             .border(
                 width = 1.dp,
-                color = AppTheme.colors.coffeeCardBorder,
+                color = CoffeeGoTheme.colors.coffeeCardBorder,
                 shape = RoundedCornerShape(18.dp)
             )
             .background(
-                color = AppTheme.colors.coffeeCardBackgroundPrimary,
+                color = CoffeeGoTheme.colors.coffeeCardBackgroundPrimary,
                 shape = RoundedCornerShape(18.dp)
             )
             .padding(16.dp)
@@ -73,7 +72,7 @@ fun PrimaryCoffeeCard(
         }
         CoffeeRating(
             modifier = Modifier.align(Alignment.BottomEnd),
-            valueColor = AppTheme.colors.textColor,
+            valueColor = CoffeeGoTheme.colors.textColor,
             value = qualification.toString()
         )
     }
@@ -91,7 +90,7 @@ private fun CoffeeImageContainer(
             .fillMaxWidth()
             .height(150.dp)
             .background(
-                color = AppTheme.colors.coffeeCardBackgroundSecondary,
+                color = CoffeeGoTheme.colors.coffeeCardBackgroundSecondary,
                 shape = RoundedCornerShape(8.dp)
             )
             .padding(10.dp),
@@ -121,7 +120,7 @@ private fun CoffeeInfo(
         style = TextStyle(
             fontFamily = FontFamily(Font(R.font.roboto_flex)),
             fontWeight = FontWeight.Medium,
-            color = AppTheme.colors.textColor,
+            color = CoffeeGoTheme.colors.textColor,
             fontSize = 17.sp
         )
     )
@@ -130,7 +129,7 @@ private fun CoffeeInfo(
         text = volume,
         style = TextStyle(
             fontFamily = FontFamily(Font(R.font.roboto_flex)),
-            color = AppTheme.colors.grayCommon,
+            color = CoffeeGoTheme.colors.grayCommon,
             fontSize = 12.sp,
             fontWeight = FontWeight.Medium
         )
@@ -140,7 +139,7 @@ private fun CoffeeInfo(
         text = "$$price",
         style = TextStyle(
             fontFamily = FontFamily(Font(R.font.roboto_flex)),
-            color = AppTheme.colors.textColor,
+            color = CoffeeGoTheme.colors.textColor,
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold
         )

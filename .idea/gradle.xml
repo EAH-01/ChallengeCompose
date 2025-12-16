@@ -46,6 +46,8 @@
             <option value="$PROJECT_DIR$/feature/search/data" />
             <option value="$PROJECT_DIR$/feature/search/domain" />
             <option value="$PROJECT_DIR$/feature/search/presentation" />
+            <option value="$PROJECT_DIR$/feature/setting" />
+            <option value="$PROJECT_DIR$/feature/setting/presentation" />
             <option value="$PROJECT_DIR$/feature/splash" />
             <option value="$PROJECT_DIR$/feature/splash/presentation" />
             <option value="$PROJECT_DIR$/lab" />

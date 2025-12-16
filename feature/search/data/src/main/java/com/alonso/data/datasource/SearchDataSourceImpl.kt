@@ -3,7 +3,7 @@ package com.alonso.data.datasource
 import com.alonso.domain.ErrorEntity
 import com.alonso.domain.ResultDataEntity
 import com.alonso.domain.entity.CoffeeEntity
-import com.alonso.network.di.network.db.CoffeeDao
+import com.alonso.data.local.db.CoffeeDao
 
 class SearchDataSourceImpl(private val coffeeDao: CoffeeDao) : SearchDataSource {
     override suspend fun searchCoffeeByName(value: String): ResultDataEntity<List<CoffeeEntity>, ErrorEntity.Local> {

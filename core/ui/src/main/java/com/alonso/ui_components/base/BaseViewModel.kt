@@ -8,22 +8,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel(
-    private val loader: Loader
+    private val loader: Loader? = null
 ) : ViewModel() {
 
     protected fun launchLoad(
         block: suspend CoroutineScope.() -> Unit
     ) {
-        loader.start()
+        loader?.start()
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 block()
             } catch (e: Throwable) {
                 Log.d("TAG", "launchLoad: ${e.message}")
             } finally {
-                loader.stop()
+                loader?.stop()
             }
-        }.invokeOnCompletion { loader.stop() }
+        }.invokeOnCompletion { loader?.stop() }
 
     }
 

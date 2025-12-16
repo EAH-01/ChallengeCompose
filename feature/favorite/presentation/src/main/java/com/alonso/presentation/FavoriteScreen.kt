@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
 import com.alonso.navigation.navRoot
@@ -41,7 +41,7 @@ fun FavoriteScreen(
     }
 
     Scaffold(
-        containerColor = AppTheme.colors.backgroundHome,
+        containerColor = CoffeeGoTheme.colors.backgroundHome,
         modifier = modifier.fillMaxSize()
     ) { innerPadding ->
         ContentCoffeeList(uiState, innerPadding, appNavigator)

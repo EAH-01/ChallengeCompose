@@ -2,7 +2,7 @@ package com.alonso.data.di
 
 import com.alonso.data.repository.FavoriteRepositoryImp
 import com.alonso.domain.repository.FavoriteRepository
-import com.alonso.network.di.network.db.CoffeeDao
+import com.alonso.data.local.db.CoffeeDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

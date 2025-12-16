@@ -1,5 +1,6 @@
 package com.alonso.ui_components.base
 
+import androidx.compose.runtime.Stable
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -7,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
 
 @ActivityRetainedScoped
+@Stable
 class Loader @Inject constructor() {
 
     private val counter = AtomicInteger(0)

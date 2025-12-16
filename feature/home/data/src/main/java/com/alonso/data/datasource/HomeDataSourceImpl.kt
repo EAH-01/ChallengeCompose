@@ -7,7 +7,7 @@ import com.alonso.domain.ResultDataEntity
 import com.alonso.domain.accessDataToMap
 
 import com.alonso.domain.entity.CoffeeEntity
-import com.alonso.network.di.network.network.safeApiCall
+import com.alonso.data.network.safeApiCall
 import javax.inject.Inject
 
 internal class HomeDataSourceImpl @Inject constructor(

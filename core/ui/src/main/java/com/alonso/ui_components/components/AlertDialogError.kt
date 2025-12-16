@@ -19,7 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.designsystem.R
 
 
@@ -33,7 +33,7 @@ fun AlertDialogError(
             modifier = modifier
                 .width(300.dp)
                 .background(
-                    color = AppTheme.colors.backgroundHome,
+                    color = CoffeeGoTheme.colors.backgroundHome,
                     shape = RoundedCornerShape(16.dp)
                 )
                 .padding(24.dp),
@@ -61,9 +61,9 @@ private fun ErrorIcon() {
 private fun ErrorTitle() {
     Text(
         text = "Oops!",
-        style = AppTheme.typography.commonBoldTextStyle.copy(
+        style = CoffeeGoTheme.typography.commonBoldTextStyle.copy(
             fontSize = 25.sp,
-            color = AppTheme.colors.textColor
+            color = CoffeeGoTheme.colors.textColor
         )
     )
 }
@@ -72,9 +72,9 @@ private fun ErrorTitle() {
 private fun ErrorMessage() {
     Text(
         text = "Something went wrong. Please try again later.",
-        style = AppTheme.typography.commonMediumTextStyle.copy(
+        style = CoffeeGoTheme.typography.commonMediumTextStyle.copy(
             fontSize = 16.sp,
-            color = AppTheme.colors.textColor
+            color = CoffeeGoTheme.colors.textColor
         ),
         textAlign = TextAlign.Center
     )
@@ -90,7 +90,7 @@ private fun RetryButton(onClick: () -> Unit) {
     ) {
         Text(
             "Try Again",
-            style = AppTheme.typography.commonMediumTextStyle.copy(color = Color.White)
+            style = CoffeeGoTheme.typography.commonMediumTextStyle.copy(color = Color.White)
         )
     }
 }

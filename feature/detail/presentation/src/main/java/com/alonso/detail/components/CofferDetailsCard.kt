@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.navigation.CoffeeItem
 import com.alonso.ui_components.components.CoffeeRating
 
@@ -77,7 +77,7 @@ fun CofferDetailsCard(
                 )
                 Text(
                     text = drink?.description.orEmpty(),
-                    style = AppTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium),
+                    style = CoffeeGoTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Start,
                     maxLines = 5,

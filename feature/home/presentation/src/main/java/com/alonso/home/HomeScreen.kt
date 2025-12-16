@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.designsystem.R
 import com.alonso.home.components.HomeTopBar
 import com.alonso.home.components.LoadCoffeeList
@@ -64,7 +64,7 @@ fun HomeScreen(
     }
     Scaffold(
         modifier = modifier,
-        containerColor = AppTheme.colors.backgroundHome,
+        containerColor = CoffeeGoTheme.colors.backgroundHome,
         topBar = {
             HomeTopBar(
                 categories = uiState.categories,
@@ -136,7 +136,7 @@ private fun ContentCoffeeList(
                 "Our products",
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
                 style = TextStyle(
-                    color = AppTheme.colors.textColor,
+                    color = CoffeeGoTheme.colors.textColor,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily(Font(R.font.roboto_flex))

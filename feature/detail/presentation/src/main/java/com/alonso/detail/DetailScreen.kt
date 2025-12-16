@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.detail.components.CoffeeListSlider
 import com.alonso.detail.components.CofferDetailsCard
 import com.alonso.navigation.CoffeeItem
@@ -40,7 +40,7 @@ fun DetailScreen(
 
     ScaffoldColumn(
         modifier = Modifier.fillMaxSize(),
-        containerColor = AppTheme.colors.backgroundDetails,
+        containerColor = CoffeeGoTheme.colors.backgroundDetails,
         modifierChild = modifier.verticalScroll(scrollState),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

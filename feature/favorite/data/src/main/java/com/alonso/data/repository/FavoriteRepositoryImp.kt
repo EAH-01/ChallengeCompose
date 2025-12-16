@@ -4,7 +4,7 @@ import com.alonso.domain.ErrorEntity
 import com.alonso.domain.ResultDataEntity
 import com.alonso.domain.entity.CoffeeEntity
 import com.alonso.domain.repository.FavoriteRepository
-import com.alonso.network.di.network.db.CoffeeDao
+import com.alonso.data.local.db.CoffeeDao
 
 class FavoriteRepositoryImp(private val coffeeDao: CoffeeDao) : FavoriteRepository {
     override suspend fun getFavoriteCoffees(): ResultDataEntity<List<CoffeeEntity>?, ErrorEntity.Local> {

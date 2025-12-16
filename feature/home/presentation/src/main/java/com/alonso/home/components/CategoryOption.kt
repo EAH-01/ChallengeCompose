@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 
 
 @Composable
@@ -24,14 +24,14 @@ fun CategoryOption(
     isSelected: Boolean = false,
     onClick: () -> Unit = {}
 ) {
-    val backgroundColor = if (isSelected) AppTheme.colors.optionCategoryBackgroundEnabled
-    else AppTheme.colors.optionCategoryBackgroundDisabled
+    val backgroundColor = if (isSelected) CoffeeGoTheme.colors.optionCategoryBackgroundEnabled
+    else CoffeeGoTheme.colors.optionCategoryBackgroundDisabled
 
-    val borderColor = if (isSelected) AppTheme.colors.optionCategoryBorderEnabled
-    else AppTheme.colors.optionCategoryBorderDisabled
+    val borderColor = if (isSelected) CoffeeGoTheme.colors.optionCategoryBorderEnabled
+    else CoffeeGoTheme.colors.optionCategoryBorderDisabled
 
-    val textColor = if (isSelected) AppTheme.colors.optionCategoryTextEnabled else
-        AppTheme.colors.optionCategoryTextDisabled
+    val textColor = if (isSelected) CoffeeGoTheme.colors.optionCategoryTextEnabled else
+        CoffeeGoTheme.colors.optionCategoryTextDisabled
 
 
     Text(
@@ -53,7 +53,7 @@ fun CategoryOption(
             )
             .padding(horizontal = 16.dp, vertical = 8.dp),
         text = text,
-        style = AppTheme.typography.bodyMedium.copy(
+        style = CoffeeGoTheme.typography.bodyMedium.copy(
             color = textColor,
             fontSize = 12.sp,
             fontWeight = if (isSelected) FontWeight.Medium else FontWeight.Normal

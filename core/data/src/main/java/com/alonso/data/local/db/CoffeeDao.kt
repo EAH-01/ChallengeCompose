@@ -1,4 +1,4 @@
-package com.alonso.network.di.network.db
+package com.alonso.data.local.db
 
 import androidx.room.Dao
 import androidx.room.Insert

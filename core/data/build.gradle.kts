@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.alonso.network"
+    namespace = "com.alonso.data"
     compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
@@ -42,6 +42,8 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     implementation("androidx.room:room-runtime:2.8.3")
     implementation("androidx.room:room-ktx:2.6.1")

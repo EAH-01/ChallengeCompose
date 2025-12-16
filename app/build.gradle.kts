@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(project(":core:ui"))
 
     //Module Dashboard
@@ -79,10 +80,14 @@ dependencies {
     implementation(project(":feature:favorite:domain"))
     implementation(project(":feature:favorite:data"))
 
+    //Module Favorite
+    implementation(project(":feature:setting:presentation"))
     //Others
     implementation(project(":core:navigation"))
     implementation(project(":core:designsystem"))
 
+    // Hilt
+    implementation(libs.compose.hilt.navigation)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 

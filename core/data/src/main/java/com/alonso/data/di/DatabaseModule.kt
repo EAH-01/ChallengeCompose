@@ -1,7 +1,9 @@
-package com.alonso.network.di.network.db
+package com.alonso.data.di
 
 import android.content.Context
 import androidx.room.Room
+import com.alonso.data.local.db.AppDatabase
+import com.alonso.data.local.db.CoffeeDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +24,7 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            AppDatabase.DATABASE_NAME
+            AppDatabase.Companion.DATABASE_NAME
         ).build()
     }
 

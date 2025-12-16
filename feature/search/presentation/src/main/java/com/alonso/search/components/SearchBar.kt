@@ -24,7 +24,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.designsystem.R
 
 @Composable
@@ -48,8 +48,8 @@ fun SearchBar(
             onDone = { onSearch() }
         ),
         colors = TextFieldDefaults.colors(
-            focusedTextColor = AppTheme.colors.textColor,
-            unfocusedTextColor = AppTheme.colors.textColor,
+            focusedTextColor = CoffeeGoTheme.colors.textColor,
+            unfocusedTextColor = CoffeeGoTheme.colors.textColor,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             cursorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
@@ -58,8 +58,8 @@ fun SearchBar(
             disabledContainerColor = Color.Transparent,
             disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
             disabledIndicatorColor = Color.Transparent,
-            disabledLeadingIconColor = AppTheme.colors.textColor,
-            disabledPlaceholderColor = AppTheme.colors.textColor
+            disabledLeadingIconColor = CoffeeGoTheme.colors.textColor,
+            disabledPlaceholderColor = CoffeeGoTheme.colors.textColor
         ),
 
         onValueChange = { textChange(it) },
@@ -68,19 +68,19 @@ fun SearchBar(
                 painter = painterResource(id = R.drawable.ic_search),
                 contentDescription = null,
                 Modifier.size(22.dp),
-                tint = AppTheme.colors.iconTint
+                tint = CoffeeGoTheme.colors.iconTint
             )
         },
         placeholder = {
             Text(
                 "Search...",
-                style = TextStyle(fontSize = 14.sp, color = AppTheme.colors.textColor)
+                style = TextStyle(fontSize = 14.sp, color = CoffeeGoTheme.colors.textColor)
             )
         },
         modifier = modifier
             .fillMaxWidth()
             .focusRequester(focusRequester)
-            .background(color = AppTheme.colors.backgroundSearchBar, RoundedCornerShape(12.dp))
+            .background(color = CoffeeGoTheme.colors.backgroundSearchBar, RoundedCornerShape(12.dp))
 
     )
 

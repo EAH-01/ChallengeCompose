@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 
 @Composable
 fun LoaderModal(isShow: Boolean) {
@@ -28,7 +28,7 @@ fun ContentLoader(modifier: Modifier = Modifier) {
     Box(
         modifier
             .fillMaxSize()
-            .background(AppTheme.colors.backgroundHome),
+            .background(CoffeeGoTheme.colors.backgroundHome),
         contentAlignment = Alignment.Center,
         content = {
             CircularProgressIndicator()

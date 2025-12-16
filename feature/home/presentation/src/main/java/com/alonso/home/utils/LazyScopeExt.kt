@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.designsystem.R
 
 
@@ -30,7 +30,7 @@ fun LazyStaggeredGridScope.RowCoffeeSection(
                 titleSection,
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
                 style = TextStyle(
-                    color = AppTheme.colors.textColor,
+                    color = CoffeeGoTheme.colors.textColor,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily(Font(R.font.roboto_flex))

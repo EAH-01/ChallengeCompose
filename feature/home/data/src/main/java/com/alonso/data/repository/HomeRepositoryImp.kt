@@ -5,7 +5,7 @@ import com.alonso.domain.ErrorEntity
 import com.alonso.domain.ResultDataEntity
 import com.alonso.domain.entity.CoffeeEntity
 import com.alonso.domain.repository.HomeRepository
-import com.alonso.network.di.network.db.CoffeeDao
+import com.alonso.data.local.db.CoffeeDao
 
 class HomeRepositoryImp(
     val homeDataSource: HomeDataSource,
@@ -22,7 +22,7 @@ class HomeRepositoryImp(
             data?.let { data ->
                 coffeeDao.insertCoffees(
                     data.map {
-                        com.alonso.network.di.network.db.CoffeeEntity(
+                        com.alonso.data.local.db.CoffeeEntity(
                             id = it.id,
                             name = it.name,
                             price = it.price,

@@ -29,7 +29,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alonso.designsystem.AppTheme
+import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.designsystem.R
 import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
@@ -67,7 +67,7 @@ fun SplashScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(AppTheme.colors.backgroundSplash),
+            .background(CoffeeGoTheme.colors.backgroundSplash),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -90,7 +90,7 @@ fun SplashScreen(
             )
             AnimatedVisibility(visible = scale < 2f) {
                 Text(
-                    "CoffeeGo", color = AppTheme.colors.textIconSplash,
+                    "CoffeeGo", color = CoffeeGoTheme.colors.textIconSplash,
                     style = TextStyle(
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
