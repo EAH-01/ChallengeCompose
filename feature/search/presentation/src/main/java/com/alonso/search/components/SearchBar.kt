@@ -73,7 +73,7 @@ fun SearchBar(
         },
         placeholder = {
             Text(
-                "Search...",
+                "What are you searching for?",
                 style = TextStyle(fontSize = 14.sp, color = CoffeeGoTheme.colors.textColor)
             )
         },

@@ -1,5 +1,6 @@
 package com.alonso.search
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,6 +20,7 @@ import com.alonso.navigation.AppScreen
 import com.alonso.navigation.navRoot
 import com.alonso.search.components.SearchBar
 import com.alonso.ui_components.components.AlertDialogError
+import com.alonso.ui_components.components.CoffeeGoHeader
 import com.alonso.ui_components.components.ContentLoader
 import com.alonso.ui_components.components.PrimaryCoffeeCard
 
@@ -44,13 +46,20 @@ fun SearchScreen(
 
     Scaffold(
         topBar = {
-            SearchBar(
-                textChange = { viewModel.setCoffeeToSearch(it) },
-                modifier = Modifier.padding(12.dp),
-                textValue = uiState.coffeeToSearch,
-                autofocus = true,
-                onSearch = {}
-            )
+            Column {
+                CoffeeGoHeader(
+                    title = "Search",
+                    modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 12.dp)
+                )
+                SearchBar(
+                    textChange = { viewModel.setCoffeeToSearch(it) },
+                    modifier = Modifier.padding(12.dp),
+                    textValue = uiState.coffeeToSearch,
+                    autofocus = true,
+                    onSearch = {}
+                )
+            }
+
         },
         containerColor = CoffeeGoTheme.colors.backgroundHome,
         modifier = modifier

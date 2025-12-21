@@ -9,10 +9,11 @@ import androidx.compose.runtime.compositionLocalOf
 @Immutable
 data class CoffeeGoThemeData(
     val colors: CustomColors,
-    val typography: CustomTypography
+    val typography: CustomTypography,
+    val isDarkTheme: Boolean = false
 )
 
- val LocalCoffeeGoTheme = compositionLocalOf<CoffeeGoThemeData> {
+val LocalCoffeeGoTheme = compositionLocalOf<CoffeeGoThemeData> {
     error("No CoffeeGoTheme provided!")
 }
 
@@ -26,5 +27,10 @@ object CoffeeGoTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalCoffeeGoTheme.current.typography
+
+    val isDarkTheme: Boolean
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalCoffeeGoTheme.current.isDarkTheme
 }
 

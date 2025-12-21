@@ -18,6 +18,7 @@ import com.alonso.navigation.AppNavigator
 import com.alonso.navigation.AppScreen
 import com.alonso.navigation.navRoot
 import com.alonso.ui_components.components.AlertDialogError
+import com.alonso.ui_components.components.CoffeeGoHeader
 import com.alonso.ui_components.components.ContentLoader
 import com.alonso.ui_components.components.PrimaryCoffeeCard
 
@@ -42,7 +43,8 @@ fun FavoriteScreen(
 
     Scaffold(
         containerColor = CoffeeGoTheme.colors.backgroundHome,
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
+        topBar = { CoffeeGoHeader(title = "Favorites", modifier = Modifier.padding(12.dp)) }
     ) { innerPadding ->
         ContentCoffeeList(uiState, innerPadding, appNavigator)
     }

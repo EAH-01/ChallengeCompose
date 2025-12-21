@@ -42,7 +42,7 @@ fun AppTheme(
         }
     }
     CompositionLocalProvider(
-        LocalCoffeeGoTheme provides CoffeeGoThemeData(colors, TypographyCoffee),
+        LocalCoffeeGoTheme provides CoffeeGoThemeData(colors, TypographyCoffee, isDarkMode),
         LocalComposeNavigator provides appNavigator,
         LocalThemeViewModel provides themeViewModel,
         content = content

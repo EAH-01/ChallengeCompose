@@ -13,18 +13,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alonso.designsystem.CoffeeGoTheme
 import com.alonso.designsystem.R
@@ -36,65 +39,103 @@ fun SettingScreen(
     modifier: Modifier = Modifier,
     themeViewModel: ThemeViewModel = AppSharedViewModel.themeViewModel
 ) {
-    val themeState = themeViewModel.themeState.collectAsStateWithLifecycle()
-    Scaffold(containerColor = CoffeeGoTheme.colors.backgroundHome) {
+
+    val isDarkTheme by themeViewModel.themeState.collectAsStateWithLifecycle()
+
+    Scaffold(
+        modifier = modifier,
+        containerColor = CoffeeGoTheme.colors.backgroundHome
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it),
+                .padding(paddingValues)
+                .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Box(
-                    modifier = Modifier
-                        .size(90.dp)
-                        .background(
-                            color = CoffeeGoTheme.colors.coffeeCardBackgroundSecondary,
-                            shape = RoundedCornerShape(100.dp)
-                        )
-                        .padding(16.dp),
-                    contentAlignment = Alignment.Center
-
-                ) {
-                    Image(
-                        painter = painterResource(R.drawable.ic_coffee_bean),
-                        contentDescription = "App Logo",
-                        modifier = Modifier
-                            .size(60.dp),
-                    )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("Go Coffee \nv0.0.9", style = TextStyle(textAlign = TextAlign.Center))
-            }
             Spacer(modifier = Modifier.height(32.dp))
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_favorites),
-                        contentDescription = null,
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("Terms and Conditions")
-                }
-
-                Switch(
-                    checked = themeState.value,
-                    onCheckedChange = { isDark ->
-                        themeViewModel.toggleTheme(isDark)
-                    }
-                )
-            }
-
-
+            AppVersionHeader()
+            Spacer(modifier = Modifier.height(32.dp))
+            ThemeSettingItem(
+                isDarkTheme = isDarkTheme,
+                onThemeToggle = { themeViewModel.toggleTheme(it) }
+            )
         }
     }
-
 }
 
+@Composable
+private fun AppVersionHeader(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .size(90.dp)
+                .clip(CircleShape)
+                .background(color = CoffeeGoTheme.colors.coffeeCardBackgroundSecondary)
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(R.drawable.ic_coffee_bean),
+                modifier = Modifier.size(60.dp),
+                contentDescription = null,
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = "Go Coffee \nv0.0.9",
+            style = CoffeeGoTheme.typography.commonMediumTextStyle.copy(
+                color = CoffeeGoTheme.colors.textColor,
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center
+            )
+        )
+    }
+}
+
+
+@Composable
+private fun ThemeSettingItem(
+    isDarkTheme: Boolean,
+    onThemeToggle: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_dark_model),
+                tint = CoffeeGoTheme.colors.textColor,
+                contentDescription = null,
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                "Modo Oscuro",
+                style = CoffeeGoTheme.typography.commonMediumTextStyle.copy(
+                    color = CoffeeGoTheme.colors.textColor,
+                    textAlign = TextAlign.Center,
+                    fontSize = 14.sp
+                )
+            )
+        }
+
+        Switch(
+            checked = isDarkTheme,
+            onCheckedChange = onThemeToggle
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun SettingScreenPreview() {
+    SettingScreen()
+}

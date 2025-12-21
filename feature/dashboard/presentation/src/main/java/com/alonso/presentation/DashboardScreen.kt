@@ -124,9 +124,9 @@ private fun DashboardBottomBar(
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = Color.Transparent,
                         selectedIconColor = CoffeeGoTheme.colors.optionCategoryBackgroundEnabled,
-                        unselectedIconColor = Color(0xFF878787),
+                        unselectedIconColor = CoffeeGoTheme.colors.optionCategoryBackgroundEnabled,
                         selectedTextColor = CoffeeGoTheme.colors.optionCategoryBackgroundEnabled,
-                        unselectedTextColor = Color(0xFF878787)
+                        unselectedTextColor = CoffeeGoTheme.colors.optionCategoryBackgroundEnabled
                     )
                 )
             }

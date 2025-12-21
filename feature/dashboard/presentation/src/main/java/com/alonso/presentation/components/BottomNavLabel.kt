@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -28,7 +27,7 @@ internal fun BottomNavLabel(
     isSelected: Boolean
 ) {
     val color =
-        if (isSelected) CoffeeGoTheme.colors.optionCategoryBackgroundEnabled else Color(0xFF878787)
+        if (isSelected) CoffeeGoTheme.colors.navBarItemSelected else CoffeeGoTheme.colors.navBarItemUnselected
     val fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
 
     Column(

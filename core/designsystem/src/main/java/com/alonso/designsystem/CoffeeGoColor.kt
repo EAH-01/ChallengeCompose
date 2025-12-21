@@ -29,6 +29,8 @@ data class CustomColors(
     val backgroundSearchBar: Color,
     val iconTint: Color,
     val brush: Brush,
+    val navBarItemSelected: Color,
+    val navBarItemUnselected: Color
 )
 
 val LightColors = CustomColors(
@@ -55,7 +57,7 @@ val LightColors = CustomColors(
     headerHomeSubtitle = Color(0xFF655541),
     grayCommon = Color(0xFF92908e),
     backgroundNetworkDisconnected = Color(0x49e50a2a),
-    backgroundSearchBar= Color(0xFFF3E9DF),
+    backgroundSearchBar = Color(0xFFF3E9DF),
     iconTint = Color(0xFF000000),
     brush = Brush.verticalGradient(
         colors = listOf(
@@ -63,7 +65,9 @@ val LightColors = CustomColors(
             Color(0x4DF9F4EA),
             Color(0xF7F9F4EA)
         )
-    )
+    ),
+    navBarItemSelected = Color(0xFF7d4532),
+    navBarItemUnselected = Color(0xFF4E5157)
 )
 
 val DarkColors = CustomColors(
@@ -91,7 +95,7 @@ val DarkColors = CustomColors(
     headerHomeSubtitle = Color.White,
     grayCommon = Color.White,
     backgroundNetworkDisconnected = Color(0xFFFF4F6B),
-    backgroundSearchBar= Color(0xFF272B30),
+    backgroundSearchBar = Color(0xFF272B30),
     iconTint = Color(0xFFFFFFFF),
     brush = Brush.verticalGradient(
         colors = listOf(
@@ -99,5 +103,7 @@ val DarkColors = CustomColors(
             Color(0x4D0C1015),
             Color(0xF70C1015)
         )
-    )
+    ),
+    navBarItemSelected = Color(0xFFF69C44),
+    navBarItemUnselected = Color(0xFF666D75)
 )
