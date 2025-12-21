@@ -42,7 +42,6 @@ kotlin {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_11)
     }
-    jvmToolchain(17)
 }
 
 dependencies {
