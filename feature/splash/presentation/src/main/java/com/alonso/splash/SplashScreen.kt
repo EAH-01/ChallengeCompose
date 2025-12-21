@@ -3,6 +3,7 @@ package com.alonso.splash
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
@@ -21,7 +23,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -41,26 +45,37 @@ fun SplashScreen(
     modifier: Modifier = Modifier,
     appNavigator: AppNavigator = navRoot
 ) {
-    var animationStarted by remember { mutableStateOf(false) }
 
-    // Unified alpha animation that controls both fade-in and scale timing
-    val alpha by animateFloatAsState(
-        targetValue = if (animationStarted) 1f else 0f,
+    var startLogoAnimation by remember { mutableStateOf(false) }
+    var startScaleAnimation by remember { mutableStateOf(false) }
+    var showBackground by remember { mutableStateOf(false) }
+
+
+    val logoAlpha by animateFloatAsState(
+        targetValue = if (startLogoAnimation) 1f else 0f,
         animationSpec = tween(durationMillis = 1300),
-        label = "alphaAnimation"
+        label = "logoAlpha"
     )
 
-    // Scale animation that starts after alpha reaches 1f
-    val scale by animateFloatAsState(
-        targetValue = if (animationStarted && alpha >= 0.9f) 1f else 2.3f,
+
+    val logoScale by animateFloatAsState(
+        targetValue = if (startScaleAnimation) 1f else 2.3f,
         animationSpec = tween(durationMillis = 1000),
-        label = "scaleAnimation"
+        label = "logoScale"
     )
+
 
     LaunchedEffect(Unit) {
-        delay(200) // Small delay for better visual effect
-        animationStarted = true
-        delay(2000)
+        delay(200)
+        startLogoAnimation = true
+
+        delay(1000)
+        startScaleAnimation = true
+
+        delay(1000)
+        showBackground = true
+
+        delay(1500)
         appNavigator.goTo(AppScreen.Dashboard)
     }
 
@@ -70,36 +85,83 @@ fun SplashScreen(
             .background(CoffeeGoTheme.colors.backgroundSplash),
         contentAlignment = Alignment.Center
     ) {
-        Column(
+        SplashBackground(
+            isVisible = showBackground
+        )
+
+        SplashLogoContent(
+            scale = logoScale,
+            alpha = logoAlpha
+        )
+    }
+}
+
+@Composable
+private fun SplashBackground(
+    isVisible: Boolean,
+    modifier: Modifier = Modifier
+) {
+
+    AnimatedVisibility(
+        visible = isVisible,
+        enter = fadeIn(animationSpec = tween(durationMillis = 1000)),
+        modifier = modifier.fillMaxSize()
+    ) {
+        Image(
+            painter = painterResource(R.drawable.background_coffee),
+            contentDescription = null,
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 80.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxSize()
+                .graphicsLayer { alpha = 0.5f }
+        )
+    }
+}
+
+@Composable
+private fun SplashLogoContent(
+    scale: Float,
+    alpha: Float,
+    modifier: Modifier = Modifier
+) {
+
+    val customFont = remember {
+        FontFamily(Font(R.font.roboto_flex))
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(bottom = 70.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(R.drawable.ic_coffee_bean),
+            contentDescription = "App Logo",
+            modifier = Modifier
+                .size(70.dp)
+                .graphicsLayer {
+                    scaleX = scale
+                    scaleY = scale
+                    this.alpha = alpha
+                }
+        )
+
+
+        AnimatedVisibility(
+            modifier = Modifier.offset(y = (-5).dp),
+            visible = scale < 2f,
+            enter = fadeIn(animationSpec = tween(500))
         ) {
-            Image(
-                painter = painterResource(R.drawable.ic_coffee_bean),
-                contentDescription = "App Logo",
-                modifier = Modifier
-                    .size(90.dp)
-                    .graphicsLayer(
-                        scaleX = scale,
-                        scaleY = scale,
-                        alpha = alpha
-                    ),
-            )
-            AnimatedVisibility(visible = scale < 2f) {
-                Text(
-                    "CoffeeGo", color = CoffeeGoTheme.colors.textIconSplash,
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily(Font(R.font.roboto_flex))
-                    )
+            Text(
+                text = "CoffeeGo",
+                color = CoffeeGoTheme.colors.textIconSplash,
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = customFont
                 )
-            }
-
+            )
         }
-
     }
 }
