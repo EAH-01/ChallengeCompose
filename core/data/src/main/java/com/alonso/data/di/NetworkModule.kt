@@ -19,7 +19,7 @@ internal object NetworkModule {
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl("https://coffeeapp-51434-default-rtdb.firebaseio.com")
+        .baseUrl("https://coffeego-3be31-default-rtdb.firebaseio.com")
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
