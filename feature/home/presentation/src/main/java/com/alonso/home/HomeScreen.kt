@@ -2,7 +2,9 @@ package com.alonso.home
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.items
@@ -160,6 +162,9 @@ private fun ContentCoffeeList(
                 },
                 imageUrl = coffee.image
             )
+        }
+        item(span = StaggeredGridItemSpan.FullLine) {
+            Spacer(modifier = Modifier.height(100.dp))
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.alonso.home
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.alonso.domain.getResult
 import com.alonso.domain.usecase.HomeUseCase
@@ -43,7 +42,8 @@ class HomeViewModel @Inject constructor(
                         data?.let { result ->
                             _uiState.update {
                                 it.copy(
-                                    coffeeList = result.toCoffeeItem(),
+                                    coffeeList = result
+                                        .filter { coffee -> coffee.favorite.not() }.toCoffeeItem(),
                                     favorites = result
                                         .filter { coffee -> coffee.favorite }.toCoffeeItem()
                                 )

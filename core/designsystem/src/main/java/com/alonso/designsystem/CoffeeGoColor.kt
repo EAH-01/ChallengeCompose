@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.Color
 data class CustomColors(
     val content: Color,
     val backgroundSplash: Color,
-
     val textIconSplash: Color,
     val backgroundHome: Color,
     val backgroundDetails: Color,
