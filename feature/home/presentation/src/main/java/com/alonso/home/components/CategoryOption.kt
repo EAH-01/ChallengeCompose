@@ -3,12 +3,12 @@ package com.alonso.home.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,32 +33,40 @@ fun CategoryOption(
     val textColor = if (isSelected) CoffeeGoTheme.colors.optionCategoryTextEnabled else
         CoffeeGoTheme.colors.optionCategoryTextDisabled
 
-
-    Text(
-        modifier = modifier
+    Box(
+        Modifier
             .padding(4.dp)
-            .clip(RoundedCornerShape(24.dp))
-            .clickable(
-                role = Role.Button,
-                onClick = onClick
-            )
             .background(
                 color = backgroundColor,
                 shape = RoundedCornerShape(24.dp)
             )
-            .border(
-                width = 1.dp,
-                color = borderColor,
-                shape = RoundedCornerShape(24.dp)
+    ) {
+        Text(
+            modifier = modifier
+                .padding(2.dp)
+                .clickable(
+                    role = Role.Button,
+                    onClick = onClick
+                )
+                .background(
+                    color = backgroundColor,
+                    shape = RoundedCornerShape(24.dp)
+                )
+                .border(
+                    width = if (isSelected) (1.2).dp else 1.dp,
+                    color = borderColor,
+                    shape = RoundedCornerShape(24.dp)
+                )
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            text = text,
+            style = CoffeeGoTheme.typography.bodyMedium.copy(
+                color = textColor,
+                fontSize = 12.sp,
+                fontWeight = if (isSelected) FontWeight.Medium else FontWeight.Normal
             )
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        text = text,
-        style = CoffeeGoTheme.typography.bodyMedium.copy(
-            color = textColor,
-            fontSize = 12.sp,
-            fontWeight = if (isSelected) FontWeight.Medium else FontWeight.Normal
         )
-    )
+    }
+
 }
 
 
