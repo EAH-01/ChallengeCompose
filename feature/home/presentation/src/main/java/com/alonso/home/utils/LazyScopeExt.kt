@@ -2,6 +2,7 @@ package com.alonso.home.utils
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
@@ -25,7 +26,10 @@ fun LazyStaggeredGridScope.RowCoffeeSection(
     adapter: LazyListScope.() -> Unit,
 ) {
     item(span = StaggeredGridItemSpan.FullLine) {
-        Column(modifier = modifier.fillMaxWidth()) {
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+        ) {
             Text(
                 titleSection,
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
@@ -37,7 +41,9 @@ fun LazyStaggeredGridScope.RowCoffeeSection(
                 )
             )
             LazyRow(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp)
             ) { adapter() }
         }
 
