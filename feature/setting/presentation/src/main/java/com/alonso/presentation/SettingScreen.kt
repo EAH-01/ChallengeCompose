@@ -17,12 +17,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -129,7 +131,15 @@ private fun ThemeSettingItem(
 
         Switch(
             checked = isDarkTheme,
-            onCheckedChange = onThemeToggle
+            onCheckedChange = onThemeToggle,
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = Color(0xFFF3E3CA),
+                checkedTrackColor = Color(0xFFA67415),
+                uncheckedThumbColor = Color(0xFF673E22),
+                uncheckedTrackColor = Color(0xFFE6D3C7),
+                disabledCheckedBorderColor = Color.Red,
+                uncheckedBorderColor = Color.Transparent
+            )
         )
     }
 }

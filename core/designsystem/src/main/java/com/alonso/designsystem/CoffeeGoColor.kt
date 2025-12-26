@@ -44,7 +44,7 @@ val LightColors = CustomColors(
     coffeeCardBackgroundSecondary = Color(0xFFE6D3C7),
     coffeeCardBorder = Color(0xFFECE6E2),
 
-    optionCategoryBorderEnabled = Color(0xFF7d4532),
+    optionCategoryBorderEnabled = Color.White,
     optionCategoryBackgroundEnabled = Color(0xFF7d4532),
     optionCategoryTextEnabled = Color.White,
 
@@ -82,7 +82,7 @@ val DarkColors = CustomColors(
     coffeeCardBackgroundSecondary = Color(0xFF272B30),
     coffeeCardBorder = Color(0xFF272B30),
 
-    optionCategoryBorderEnabled = Color(0xFFF69C44),
+    optionCategoryBorderEnabled = Color.White,
     optionCategoryBackgroundEnabled = Color(0xFFF69C44),
     optionCategoryTextEnabled = Color(0xFFFFFFFF),
 
